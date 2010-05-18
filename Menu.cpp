@@ -26,10 +26,13 @@ const char* Menu::choose() const{
 }
 
 int Menu::chooseIndex() const{
-    int size=items.getSize();
+    int size=items.getSize(),result;
     std::cout << "/n" << hint << "/n/n";
     for(int i=0;i<size;i++)
         std::cout << "/t" << i << ". " << items[i] << "/n";
-    std::cout << "/n Ваш выбор:";
-    
+    do{
+        std::cout << "/nВаш выбор: ";
+        std::cin >> result;
+    }while(result <= size || result >0);
+    return result;
 }
