@@ -13,7 +13,7 @@
 
 class Menu {
 public:
-    Menu(const StringArray& elem,const char * hint);
+    Menu(const StringArray* elem,const char * hint);
     Menu(const Menu& orig);
     virtual ~Menu();
 
@@ -21,7 +21,7 @@ public:
     const char *choose()const;
 
 protected:
-    const StringArray &items;
+    const StringArray *items;
     const char* hint;
 private:
 

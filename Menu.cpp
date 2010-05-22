@@ -9,7 +9,7 @@
 #include "StringArray.h"
 #include <iostream>
 
-Menu::Menu(const StringArray& elems,const char * hint) {
+Menu::Menu(const StringArray* elems,const char * hint) {
     items=elems;
     this->hint=hint;
 }
@@ -22,17 +22,20 @@ Menu::Menu(const Menu& orig) {
 Menu::~Menu() {}
 
 const char* Menu::choose() const{
-    return items[chooseIndex()];
+    return items->get(chooseIndex());
 }
 
 int Menu::chooseIndex() const{
-    int size=items.getSize(),result;
-    std::cout << "/n" << hint << "/n/n";
-    for(int i=0;i<size;i++)
-        std::cout << "/t" << i << ". " << items[i] << "/n";
+    int size=items->getSize(),result;
+    if(hint!=0)
+        std::cout << "\n" << hint;
+    std::cout << "\n\n";
+    for(int i=1;i<=size;i++)
+        std::cout << "\t" << i << ". " << items->get(i-1) << "\n";
+    std::cout << '\n';
     do{
-        std::cout << "/nВаш выбор: ";
+        std::cout << "Ваш выбор: " << std::flush;
         std::cin >> result;
-    }while(result <= size || result >0);
+    }while(result > size || result <=0);
     return result;
 }
