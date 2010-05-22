@@ -15,14 +15,20 @@ class Menu {
 public:
     Menu(const StringArray* elem,const char * hint);
     Menu(const Menu& orig);
+    Menu();
+
     virtual ~Menu();
 
     int chooseIndex()const;
     const char *choose()const;
 
+    void setElements(const StringArray* elem);
+    void setHint(const char * hint);
+    void setBack(const char *hint);
+
 protected:
     const StringArray *items;
-    const char* hint;
+    const char *hint,*back;
 private:
 
 };

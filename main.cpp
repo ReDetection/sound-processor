@@ -8,17 +8,18 @@
 #include <stdlib.h>
 #include "StringArray.h"
 #include "Menu.h"
+#include "FileSelectorUI.h"
 #include <stdio.h>
 #include <fstream>
 /*
  * 
  */
 int main(int argc, char** argv) {
-    StringArray array;
-    array.addConst("расрас");
-    array.addConst("двадва");
-    array.putConst("полтора",1);
-    array.raiseUp(2);
+//    StringArray array;
+//    array.addConst("расрас");
+//    array.addConst("двадва");
+//    array.putConst("полтора",1);
+//    array.raiseUp(2);
 //    for(int i=array.getSize()-1;i>=0;i--)
 //        printf("%s\n",array[i]);
 //    std::ofstream of;
@@ -33,11 +34,13 @@ int main(int argc, char** argv) {
 //    for(int i=aa.getSize()-1;i>=0;i--)
 //        printf("%s\n",aa[i]);
 
-    Menu menu(&array,"Так вот:");
+//    Menu menu(&array,"Так вот:");
+//
+//    menu.chooseIndex();
 
-    menu.chooseIndex();
 
-
+    FileSelectorUI fselector;
+    printf("\n\n%s\n",fselector.select());
     return (EXIT_SUCCESS);
 }
 

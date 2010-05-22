@@ -22,7 +22,7 @@ void StringArray::allocate(){
         throw "Недостаточно памяти";
 }
 StringArray::StringArray() {
-    size=10;
+    size=5;
     allocate();
 
 }
@@ -58,13 +58,13 @@ void StringArray::putConst(const char* string, int place){
     if(native[place]==ITEMOK)
         free(array[place]);
     array[place]=(char*)string;
-    native[place]=ITEMCONST;
+    native[place]= string==0 ? ITEMFREE : ITEMCONST;
 }
 void StringArray::put(char* string, int place){
     if(native[place]==ITEMOK)
         free(array[place]);
     array[place]=(char*)string;
-    native[place]=ITEMOK;
+    native[place]= string==0 ? ITEMFREE : ITEMOK;
 }
 void StringArray::putClone(const char* string, int place){
     put(strdup(string),place);
@@ -116,7 +116,7 @@ void StringArray::store(std::ofstream& out)const{
     out.write(&ID, 1);
     int size = getSize();
     out.write((const char *)&size,sizeof(int));
-    for(int i=0;i<size;i++){
+    for(int i=0,k=0;i<size && k<this->size;i++,k++){
         if(native[i]==ITEMFREE){
             i--;
             continue;
@@ -128,7 +128,7 @@ void StringArray::store(std::ofstream& out)const{
 }
 
 void StringArray::load(std::ifstream &in){
-    char ID;
+    char ID=0;
     int size;
     in.read(&ID,1);//сверяем сигнатруру
     if(ID!='A'){
@@ -144,7 +144,8 @@ void StringArray::load(std::ifstream &in){
         int len;
         char *str;
         in.read((char *)&len,sizeof(int));
-        str =(char*) malloc(len);
+        str =(char*) malloc(len+1);
+        str[len]=0;
         in.read(str,len);
         put(str,i);
     }
