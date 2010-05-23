@@ -12,6 +12,7 @@
 Menu::Menu(const StringArray* elems,const char * hint) {
     items=elems;
     this->hint=hint;
+    back=0;
 }
 Menu::Menu(){
     items=0;
@@ -29,6 +30,7 @@ void Menu::setHint(const char* hint){
 Menu::Menu(const Menu& orig) {
     hint=orig.hint;
     items=orig.items;
+    back=orig.back;
 }
 
 Menu::~Menu() {}
@@ -41,13 +43,14 @@ int Menu::chooseIndex() const{
     int size=items->getSize(),result;
     int min= back==0 ? 1 : 0;
 
+    std::cout << '\n';
     if(hint!=0)
-        std::cout << "\n" << hint;
-    std::cout << "\n\n";
+        std::cout << hint;
+    std::cout << '\n';
     if(back)
-        std::cout << "\t0. " << back << "\n";
+        std::cout << "\t0. " << back << '\n';
     for(int i=1;i<=size;i++)
-        std::cout << "\t" << i << ". " << items->get(i-1) << "\n";
+        std::cout << '\t' << i << ". " << items->get(i-1) << '\n';
     std::cout << '\n';
     do{
         std::cout << "Ваш выбор: " << std::flush;
