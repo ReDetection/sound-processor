@@ -9,6 +9,7 @@
 #include "StringArray.h"
 #include "Menu.h"
 #include "FileSelectorUI.h"
+#include "Wavefile.h"
 #include <stdio.h>
 #include <fstream>
 /*
@@ -39,8 +40,17 @@ int main(int argc, char** argv) {
 //    menu.chooseIndex();
 
 
-    FileSelectorUI fselector;
-    printf("\n\n%s\n",fselector.select());
-    return (EXIT_SUCCESS);
+//    FileSelectorUI fselector;
+//    printf("\n\n%s\n",fselector.select());
+
+
+    Wavefile wave("/home/rd/Desktop/свалка/audiodump.wav");
+
+
+
+
+
+
+    return (0);
 }
 
