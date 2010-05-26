@@ -6,6 +6,7 @@
  */
 
 #include "Wavefile.h"
+#include "WaveEffect.h"
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -37,3 +38,14 @@ Wavefile::~Wavefile() {
         delete hdr;
 }
 
+void * Wavefile::getData(){
+    return data;
+}
+
+unsigned int Wavefile::getDataSize(){
+    return hdr->dataSize;
+}
+
+template <class T> void Wavefile::applyEffect(T Effect){
+    
+}

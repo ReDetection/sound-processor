@@ -16,6 +16,12 @@ public:
     //Wavefile(Waveheader &header);//create new one
     Wavefile(const Wavefile& orig);
     virtual ~Wavefile();
+
+
+    void *getData();
+    unsigned int getDataSize();
+
+    template <class T> void applyEffect(T Effect);
     
 
 private:
