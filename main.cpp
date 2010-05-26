@@ -43,9 +43,11 @@ int main(int argc, char** argv) {
 //    FileSelectorUI fselector;
 //    printf("\n\n%s\n",fselector.select());
 
-
+    try{
     Wavefile wave("/home/rd/Desktop/свалка/audiodump.wav");
-
+    }catch(const char* msg){
+        printf(msg);
+    }
 
 
 
