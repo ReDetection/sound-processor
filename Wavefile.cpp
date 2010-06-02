@@ -6,7 +6,7 @@
  */
 
 #include "Wavefile.h"
-#include "WaveEffect.h"
+#include "union.h"
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -15,6 +15,10 @@
 
 Wavefile::Wavefile(const char* filename) {
     std::ifstream in(filename,std::ios::in | std::ios::binary);
+    uintchar t;
+    in.read(t.c,4);
+    if( t.i!= 1179011410 ) // "RIFF"
+        throw "This is not wavefile";
     hdr=new Waveheader();
     hdr->load(in);
 
@@ -46,6 +50,11 @@ unsigned int Wavefile::getDataSize(){
     return hdr->dataSize;
 }
 
-template <class T> void Wavefile::applyEffect(T Effect){
+void Wavefile::applyEffect(WaveEffect *effect){
+    effect->apply((char*)data,hdr->dataSize, hdr->bitsPerSample/8);
+    delete effect;
+}
+
+void Wavefile::store(const char* filename){
     
 }

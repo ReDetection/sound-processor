@@ -8,6 +8,7 @@
 #ifndef _WAVEFILE_H
 #define	_WAVEFILE_H
 #include "Waveheader.h"
+#include "WaveEffect.h"
 
 class Wavefile {
 public:
@@ -16,12 +17,14 @@ public:
     //Wavefile(Waveheader &header);//create new one
     Wavefile(const Wavefile& orig);
     virtual ~Wavefile();
-
+    
 
     void *getData();
     unsigned int getDataSize();
 
-    template <class T> void applyEffect(T Effect);
+    void applyEffect(WaveEffect *effect);
+
+    void store(const char* filename); //save into file
     
 
 private:

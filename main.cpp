@@ -10,6 +10,8 @@
 #include "Menu.h"
 #include "FileSelectorUI.h"
 #include "Wavefile.h"
+#include "WaveEffect.h"
+#include "Amplifier.h"
 #include <stdio.h>
 #include <fstream>
 /*
@@ -42,13 +44,13 @@ int main(int argc, char** argv) {
 
 //    FileSelectorUI fselector;
 //    printf("\n\n%s\n",fselector.select());
-
+    
     try{
-    Wavefile wave("/home/rd/Desktop/свалка/audiodump.wav");
+        Wavefile wave("/home/rd/Desktop/свалка/audiodump.wav");
+        wave.applyEffect(new Amplifier(2.0));
     }catch(const char* msg){
         printf(msg);
     }
-
 
 
 

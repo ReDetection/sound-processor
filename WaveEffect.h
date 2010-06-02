@@ -13,9 +13,16 @@ public:
     WaveEffect();
     WaveEffect(const WaveEffect& orig);
     virtual ~WaveEffect();
+
+    //модифицируем сэмплики
+    virtual char apply(char sample)=0;
+    virtual short apply(short sample)=0;
+
+    virtual void apply(char *samples,unsigned int sizeinbytes,unsigned short bytePerSample);
+    
 private:
 
-    int i;
+    unsigned int i;
 
 };
 
