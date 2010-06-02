@@ -10,18 +10,19 @@
 
 #include "WaveChunk.h"
 
-class UnknownChunk:public WaveChunk {
-public:
+class UnknownChunk: public WaveChunk {
+public: 
     UnknownChunk();
     UnknownChunk(const UnknownChunk& orig);
     virtual ~UnknownChunk();
+
 
     virtual const char *getData();
     
 
 protected:
-    virtual void loadData(std::ifstream in);
-    virtual void saveData(std::ofstream out);
+    virtual void loadData(std::ifstream& in);
+    virtual void saveData(std::ofstream& out);
 
 private:
     char *data;

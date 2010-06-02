@@ -7,8 +7,9 @@
 
 #ifndef _WAVEFILE_H
 #define	_WAVEFILE_H
-#include "Waveheader.h"
 #include "WaveEffect.h"
+#include "list.h"
+#include "WaveChunk.h"
 
 class Wavefile {
 public:
@@ -17,10 +18,6 @@ public:
     //Wavefile(Waveheader &header);//create new one
     Wavefile(const Wavefile& orig);
     virtual ~Wavefile();
-    
-
-    void *getData();
-    unsigned int getDataSize();
 
     void applyEffect(WaveEffect *effect);
 
@@ -28,8 +25,8 @@ public:
     
 
 private:
-    Waveheader *hdr;
-    void *data;
+    List<WaveChunk> chunks;
+    int globalsize;
 };
 
 #endif	/* _WAVEFILE_H */
