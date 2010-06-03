@@ -30,18 +30,22 @@ void FormatChunk::saveData(std::ofstream& out)const{
 
 
 unsigned short FormatChunk::getFormatTag() const{
-    
+    return format.formatTag;
     
 }
 unsigned short FormatChunk::getChannels()const{
+    return format.channels;
 
 }
 unsigned int FormatChunk::getSamplesPerSec()const{
-
+    return format.samplesPerSec;
 }
 unsigned int FormatChunk::getAvgBytesPerSec()const{
-
+    return format.avgBytesPerSec;
 }
 unsigned short FormatChunk::getBlockAlign()const{
-
+    return format.blockAlign;
+}
+unsigned short  FormatChunk::bitsPerSample()const{
+    return format.bitsPerSample;
 }

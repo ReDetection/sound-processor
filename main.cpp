@@ -47,8 +47,7 @@ int main(int argc, char** argv) {
     
     try{
         WaveFile wave("/home/rd/Desktop/свалка/audiodump.wav");
-//        wave.applyEffect(new Amplifier(2.0));
-
+        wave.applyEffect(new Amplifier(0.5));
         wave.store("/tmp/1.wav");
     }catch(const char* msg){
         printf(msg);

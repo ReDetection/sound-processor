@@ -58,7 +58,9 @@ WaveFile::~WaveFile() {
 }
 
 void WaveFile::applyEffect(WaveEffect *effect){
-//    effect->apply((char*)data,hdr->dataSize, hdr->bitsPerSample/8);
+    for(int i=chunks.getSize()-1;i>=0;i--)
+        if(chunks[i].getID() == WaveChunk::DATAID)
+            effect->apply((DataChunk&)(chunks[i]));
     delete effect;
 }
 

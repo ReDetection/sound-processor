@@ -21,6 +21,7 @@ public:
     unsigned int getSamplesPerSec()const; // Частота дискретизации
     unsigned int getAvgBytesPerSec()const; // Байт в секунду
     unsigned short getBlockAlign()const; // Выравнивание данных в data-чанке
+    unsigned short bitsPerSample()const;
 
 protected:
     virtual void loadData(std::ifstream& in);
@@ -30,11 +31,12 @@ private:
 
 typedef struct
   {
-  unsigned short wFormatTag; // Категория формата
-  unsigned short nChannels; // Число каналов
-  unsigned int nSamplesPerSec; // Частота дискретизации
-  unsigned int nAvgBytesPerSec; // Байт в секунду
-  unsigned short nBlockAlign; // Выравнивание данных в data-чанке
+  unsigned short formatTag; // Категория формата
+  unsigned short channels; // Число каналов
+  unsigned int samplesPerSec; // Частота дискретизации
+  unsigned int avgBytesPerSec; // Байт в секунду
+  unsigned short blockAlign; // Выравнивание данных в data-чанке
+  unsigned short bitsPerSample; 
   } WaveFormat;
 
   WaveFormat format;

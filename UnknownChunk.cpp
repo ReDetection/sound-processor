@@ -34,6 +34,6 @@ void UnknownChunk::saveData(std::ofstream& out)const{
     out.write(data,getSize());
 }
 
-const char * UnknownChunk::getData()const{
+char * UnknownChunk::getData(){
     return data;
 }

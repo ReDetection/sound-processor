@@ -20,15 +20,18 @@ WaveEffect::WaveEffect(const WaveEffect& orig) {
 WaveEffect::~WaveEffect() {
 }
 
-void WaveEffect::apply(char* samples,unsigned int size /*in bytes*/, unsigned short bytePerSample){
-    size/=bytePerSample;
-    for(i=0;i<size;i++,samples+=bytePerSample){
+void WaveEffect::apply(DataChunk &samples){
+    unsigned short bytePerSample=samples.getFormat()->bitsPerSample()/8;
+    unsigned int count=samples.getSize()/bytePerSample; //samples count
+    char *data = samples.getData();
+
+    for(i=0;i<count;i++,data+=bytePerSample){
         switch(bytePerSample){
             case 1:
-                apply(*((char*)samples));
+                *((char*)data)=apply(*((char*)data));
                 break;
             case 2:
-                apply(*((short*)samples));
+                *((short*)data)=apply(*((short*)data));
                 break;
             default:
                 throw "Такой битрейт пока не поддерживается";

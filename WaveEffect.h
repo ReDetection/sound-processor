@@ -8,6 +8,9 @@
 #ifndef _WAVEEFFECT_H
 #define	_WAVEEFFECT_H
 
+#include "DataChunk.h"
+
+
 class WaveEffect {
 public:
     WaveEffect();
@@ -18,7 +21,7 @@ public:
     virtual char apply(char sample)=0;
     virtual short apply(short sample)=0;
 
-    virtual void apply(char *samples,unsigned int sizeinbytes,unsigned short bytePerSample);
+    virtual void apply(DataChunk &samples);
     
 private:
 

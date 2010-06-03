@@ -17,7 +17,7 @@ public:
     virtual ~UnknownChunk();
 
 
-    virtual const char *getData() const;
+    virtual char *getData();
     
 
 protected:
