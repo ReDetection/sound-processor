@@ -21,8 +21,8 @@ WaveChunk::WaveChunk(const WaveChunk& orig){
 unsigned int WaveChunk::getSize()const {
     return size.i;
 }
-uintchar WaveChunk::getID() const{
-    return id;
+unsigned int WaveChunk::getID() const{
+    return id.i;
 }
 
 WaveChunk* WaveChunk::load(std::ifstream& in){
@@ -33,10 +33,10 @@ WaveChunk* WaveChunk::load(std::ifstream& in){
     WaveChunk *chunk;
     
     switch (id.i){
-        case 544501094: //"fmt "
+        case FORMATID: //"fmt "
             chunk = new FormatChunk();
             break;
-        case 1635017060:// "data"
+        case DATAID:// "data"
             
         default:
             chunk = new UnknownChunk();

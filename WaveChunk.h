@@ -12,27 +12,24 @@
 
 class WaveChunk {
 public:
+
+    static const unsigned int FORMATID=544501094;
+    static const unsigned int DATAID=1635017060;
+    
     WaveChunk();
     WaveChunk(const WaveChunk& orig);
     virtual ~WaveChunk(){};
 
     unsigned int getSize()const;
-    uintchar getID()const;
+    unsigned int getID()const;
 
     static WaveChunk *load(std::ifstream& in);
     void save(std::ofstream& out);
 
 protected:
-    /*
-     * следующие две строки были pure (т.е. =0 ), пока мне не понадобилось
-     * использовать load. я долго ругался на то, что нельзя вызвать статический
-     *  метод у класса(т.е. не у экземпляра класса), после нескольких проб
-     * с отдельными классами для загрузки чанка я пришел к выводу, что лучше
-     * уж сделать этот класс не абстрактным и самому следить за наследованием,
-     *  чем наплодить классов тучу, потерять красоту и простоту в этом.
-     */
-    virtual void loadData(std::ifstream& in){};
-    virtual void saveData(std::ofstream& out)const{};
+    
+    virtual void loadData(std::ifstream& in)=0;
+    virtual void saveData(std::ofstream& out)const=0;
 
 private:
 

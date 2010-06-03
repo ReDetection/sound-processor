@@ -28,9 +28,8 @@ WaveFile::WaveFile(const char* filename) {
         if( t.i!= 1163280727 ) // "WAVE"
             throw "This is not wavefile";
 
-        WaveChunk sta; //фактически, обход невозможности вызвать статический метод у не экземпляра класса
         for(unsigned int i=4;i<globalsize;){
-            WaveChunk *chunk = sta.load(in);
+            WaveChunk *chunk = WaveChunk::load(in);
             chunks.append(chunk);
             i+=chunk->getSize();
             i+=8;
