@@ -11,7 +11,7 @@
 #include "WaveChunk.h"
 
 class UnknownChunk: public WaveChunk {
-public: 
+public:
     UnknownChunk();
     UnknownChunk(const UnknownChunk& orig);
     virtual ~UnknownChunk();
