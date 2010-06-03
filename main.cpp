@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
 //        wave.applyEffect(new Amplifier(2.0));
     }catch(const char* msg){
         printf(msg);
-        throw msg;
+//        throw msg;
     }
 
 

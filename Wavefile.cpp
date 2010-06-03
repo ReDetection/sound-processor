@@ -13,26 +13,36 @@
 
 Wavefile::Wavefile(const char* filename) {
     std::ifstream in(filename,std::ios::in | std::ios::binary);
+    in.exceptions(std::ios::badbit);
     uintchar t;
-    in.read(t.c,4);
-    if( t.i!= 1179011410 ) // "RIFF"
-        throw "This is not wavefile";
+    unsigned int i;
+    WaveChunk *chunk;
 
-    in.read(t.c,4);
-    globalsize=t.i;
+    try{
+        in.read(t.c,4);
+        if( t.i!= 1179011410 ) // "RIFF"
+            throw "This is not wavefile";
 
-    in.read(t.c,4);
-    if( t.i!= 1163280727 ) // "WAVE"
-        throw "This is not wavefile";
+        in.read(t.c,4);
+        globalsize=t.i;
 
-    WaveChunk sta; //фактически, обход невозможности вызвать статический метод у не экземпляра класса
-    for(unsigned int i=0;i<globalsize;){
-        WaveChunk *chunk = sta.load(in);
-        chunks.append(*chunk);
-        i+=chunk->getSize();
-        i+=4;
+        in.read(t.c,4);
+        if( t.i!= 1163280727 ) // "WAVE"
+            throw "This is not wavefile";
+
+        WaveChunk sta; //фактически, обход невозможности вызвать статический метод у не экземпляра класса
+        for(i=4;i<globalsize;){
+            chunk = sta.load(in);
+            chunks.append(chunk);
+            i+=chunk->getSize();
+            i+=8;
+        }
+    }catch(std::ios::failure f){
+//        i+=chunk->getSize();
+//        i+=8;
+//        if(i<globalsize)
+            throw "Неожиданный конец файла";
     }
-   
 }
 
 Wavefile::Wavefile(const Wavefile& orig) {

@@ -12,28 +12,28 @@
 using namespace std;
 template<class T>
 class List {
-	class ListItem {
-	public:
-		T *data;
-		ListItem *next;
-		ListItem() {
-			next = 0;
-		}
-		ListItem(const T* data){
-			this->data=data;
-			next=0;
-		}
-	};
+    class ListItem {
+    public:
+        T *data;
+        ListItem *next;
+        ListItem() {
+            next = 0;
+        }
+        ListItem(T* data){
+            this->data=data;
+            next=0;
+        }
+    };
 
-	ListItem *head,*end;
-	int size;
+    ListItem *head,*end;
+    int size;
 
 public:
-	List() {
-		head = 0;
-		size=0;
-		end=0;
-	}
+    List() {
+        head = 0;
+        size=0;
+        end=0;
+    }
 
     int getSize() const{
         return size;
@@ -44,7 +44,7 @@ public:
      * добавление нового элемента
      * возвращает индекс нового элемента или -1, если не хватило памяти
      */
-    int append(const T *value){
+    int append(T *value){
     	ListItem *n = new ListItem(value);
 	if(n==0)
             return -1;
@@ -58,157 +58,51 @@ public:
         return size++;
     }
 
-//    /*
-//     * вставка отличается от добавления тем, что сохраняется порядок(если он, конечно, есть :) )
-//     * возвращает индекс нового элемента или -1, если не хватило памяти
-//     */
-//    int insert(const T& value){
-//    	if(size==0)
-//    		return append(value);
-//
-//    	ListItem *n = new ListItem(value), *p = head;
-//    	if(n==0)
-//    		return -1;
-//
-//    	for(;p->next!=0 && p->next->data < value; p=p->next);
-//    	n->next=p->next;
-//    	p->next=n;
-//    	if(n->next==0)
-//    		end = n;
-//    	return size++;
-//    }
 
-//    /*
-//     * adds n elements from array
-//     * returns added elements count
-//     */
-//    int appendAll(T* array,int n){
-//    	int added=0;
-//    	for(int i=0;i<n;i++)
-//    		if(append(array[i])!=-1)
-//    			added++;
-//    		else
-//    			return added;
-//    	return added;
-//    }
 
-//    /*
-//     * создает в памяти массив из элементов списка и его возвращает
-//     */
-//    T* toArray(){
-//    	T* result = new T[size];
-//    	ListItem *p=head;
-//    	for(int i=0;i<size;i++,p=p->next)
-//    		result[i]=p->data;
-//    	return result;
-//    }
+    ~List() {
+        for(ListItem *p=head; p!=0 ; p=head){
+            head=head->next;
+            delete p;
+        }
+    }
+    T* getItem(int index) const{
+        ListItem *p=head;
+        for(int i=0;i<index;i++,p=p->next); // ищем
+        return p->data;
+    }
 
-//    /*
-//     * добавляет содержимое списка list в хвост текущего.
-//     * возвращает количество добавленных элементов
-//     */
-//    int append(List &list){
-//    	T *t = list.toArray();
-//    	int result =  appendAll(t,list.getSize());
-//    	delete []t;
-//    	return result;
-//    }
+    T& getItemByRef(int index){
+        ListItem *p=head;
+        for(int i=0;i<index;i++,p=p->next);
+        return *p->data;
+    }
 
-//    List(T* &fromArray,int count){
-//    	(*this)();
-//    	append(fromArray,count);
-//    }
 
-//    List& clone() const{
-//        List *result = new List(getSize());
-//        ListItem *t=result;
-//        for(ListItem *p=head;p!=0;p=p->next)
-//        	result->addItem(p->data);
-//        return *result;
-//    }
-//
-//	List(List& clone){
-//		head = 0;
-//		size=0;
-//		end=0;
-//    	append(clone);
-//	}
-
-//	/*
-//	 * добавляет элемент в список по определенному порядковому номеру. существующие, начиная с заданного порядкового номера сдвигаются вправо.
-//	 * возвращает индекс добавленного элемента в случае успеха и -1 иначе.
-//	 */
-//	int append(T &value,int index){
-//		if(index>=size)
-//			return append(value);
-//
-//		ListItem *n = new ListItem(value);
-//		if(n==0)
-//			return -1;
-//
-//		if(index<=0){
-//			n->next = head;
-//			head = n;
-//			size++;
-//			return 0;
-//		}
-//
-//		ListItem *p=head;
-//		for(int i=1;i<index;i++,p=p->next);
-//		n->next = p->next;
-//		p->next = n;
-//		size++;
-//		return index;
-//	}
-
-	~List() {
-		for(ListItem *p=head; p!=0 ; p=head){
-			head=head->next;
-			delete p;
-		}
-	}
-	T* getItem(int index) const{
-		ListItem *p=head;
-		for(int i=0;i<index;i++,p=p->next); // ищем
-		return p->data;
-	}
-
-	T& getItemByRef(int index){
-		ListItem *p=head;
-		for(int i=0;i<index;i++,p=p->next);
-		return *p->data;
-	}
-
-//	int getIndex(T& item) const {
-//		int result = 0;
-//		ListItem *p=head;
-//		for(; p!=0 && *p->data!=item;  p=p->next,result++);
-//		return p==0 ? 0 : result;
-//	}
-	void remove(int index) {
-		if(index >= size || index < 0)
-			return;
-		ListItem *pre, *p, *post;
-		if(size==index+1)
-			end=0;
-		size--;
-		if(index==0){
-			p=head;
-			head=head->next;
-			delete p;
-			return;
-		}
-		pre = head;
-		p=head->next;
-		post = p->next;
-		for(int i=1;i<index;i++){
-			pre=p;
-			p=post;
-			post=post->next;
-		}
-		pre->next=post;
-		delete p;
-	}
+    void remove(int index) {
+        if(index >= size || index < 0)
+            return;
+        ListItem *pre, *p, *post;
+        if(size==index+1)
+            end=0;
+        size--;
+        if(index==0){
+            p=head;
+            head=head->next;
+            delete p;
+            return;
+        }
+        pre = head;
+        p=head->next;
+        post = p->next;
+        for(int i=1;i<index;i++){
+            pre=p;
+            p=post;
+            post=post->next;
+        }
+        pre->next=post;
+        delete p;
+    }
 //	void removeItem(T& item) {
 //		remove(getIndex(item));
 //	}
@@ -333,8 +227,114 @@ public:
 //		return out;
 //	}
 
+//    /*
+//     * вставка отличается от добавления тем, что сохраняется порядок(если он, конечно, есть :) )
+//     * возвращает индекс нового элемента или -1, если не хватило памяти
+//     */
+//    int insert(const T& value){
+//    	if(size==0)
+//    		return append(value);
+//
+//    	ListItem *n = new ListItem(value), *p = head;
+//    	if(n==0)
+//    		return -1;
+//
+//    	for(;p->next!=0 && p->next->data < value; p=p->next);
+//    	n->next=p->next;
+//    	p->next=n;
+//    	if(n->next==0)
+//    		end = n;
+//    	return size++;
+//    }
 
+//    /*
+//     * adds n elements from array
+//     * returns added elements count
+//     */
+//    int appendAll(T* array,int n){
+//    	int added=0;
+//    	for(int i=0;i<n;i++)
+//    		if(append(array[i])!=-1)
+//    			added++;
+//    		else
+//    			return added;
+//    	return added;
+//    }
 
+//    /*
+//     * создает в памяти массив из элементов списка и его возвращает
+//     */
+//    T* toArray(){
+//    	T* result = new T[size];
+//    	ListItem *p=head;
+//    	for(int i=0;i<size;i++,p=p->next)
+//    		result[i]=p->data;
+//    	return result;
+//    }
+
+//    /*
+//     * добавляет содержимое списка list в хвост текущего.
+//     * возвращает количество добавленных элементов
+//     */
+//    int append(List &list){
+//    	T *t = list.toArray();
+//    	int result =  appendAll(t,list.getSize());
+//    	delete []t;
+//    	return result;
+//    }
+
+//    List(T* &fromArray,int count){
+//    	(*this)();
+//    	append(fromArray,count);
+//    }
+
+//    List& clone() const{
+//        List *result = new List(getSize());
+//        ListItem *t=result;
+//        for(ListItem *p=head;p!=0;p=p->next)
+//        	result->addItem(p->data);
+//        return *result;
+//    }
+//
+//	List(List& clone){
+//		head = 0;
+//		size=0;
+//		end=0;
+//    	append(clone);
+//	}
+
+//	/*
+//	 * добавляет элемент в список по определенному порядковому номеру. существующие, начиная с заданного порядкового номера сдвигаются вправо.
+//	 * возвращает индекс добавленного элемента в случае успеха и -1 иначе.
+//	 */
+//	int append(T &value,int index){
+//		if(index>=size)
+//			return append(value);
+//
+//		ListItem *n = new ListItem(value);
+//		if(n==0)
+//			return -1;
+//
+//		if(index<=0){
+//			n->next = head;
+//			head = n;
+//			size++;
+//			return 0;
+//		}
+//
+//		ListItem *p=head;
+//		for(int i=1;i<index;i++,p=p->next);
+//		n->next = p->next;
+//		p->next = n;
+//		size++;
+//		return index;
+//	}
+//	int getIndex(T& item) const {
+//		int result = 0;
+//		ListItem *p=head;
+//		for(; p!=0 && *p->data!=item;  p=p->next,result++);
+//		return p==0 ? 0 : result;
+//	}
 
 };
 
