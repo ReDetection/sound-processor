@@ -13,10 +13,8 @@
 
 Wavefile::Wavefile(const char* filename) {
     std::ifstream in(filename,std::ios::in | std::ios::binary);
-    in.exceptions(std::ios::badbit);
+    in.exceptions( std::ios::failbit);
     uintchar t;
-    unsigned int i;
-    WaveChunk *chunk;
 
     try{
         in.read(t.c,4);
@@ -31,16 +29,13 @@ Wavefile::Wavefile(const char* filename) {
             throw "This is not wavefile";
 
         WaveChunk sta; //фактически, обход невозможности вызвать статический метод у не экземпляра класса
-        for(i=4;i<globalsize;){
-            chunk = sta.load(in);
+        for(unsigned int i=4;i<globalsize;){
+            WaveChunk *chunk = sta.load(in);
             chunks.append(chunk);
             i+=chunk->getSize();
             i+=8;
         }
     }catch(std::ios::failure f){
-//        i+=chunk->getSize();
-//        i+=8;
-//        if(i<globalsize)
             throw "Неожиданный конец файла";
     }
 }

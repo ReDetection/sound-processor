@@ -23,6 +23,9 @@ class List {
             this->data=data;
             next=0;
         }
+        ~ListItem(){
+            delete data;
+        }
     };
 
     ListItem *head,*end;
