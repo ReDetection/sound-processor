@@ -24,12 +24,16 @@ UnknownChunk::~UnknownChunk() {
 
 void UnknownChunk::loadData(std::ifstream& in){
     int sz=getSize();
-    data = malloc(sz);
+    data =(char *) malloc(sz);
     if(data==0)
         throw "Недостаточно памяти! :(";
     in.read(data,sz);
 }
 
-void UnknownChunk::saveData(std::ofstream& out){
+void UnknownChunk::saveData(std::ofstream& out)const{
     out.write(data,getSize());
+}
+
+const char * UnknownChunk::getData()const{
+    return data;
 }

@@ -32,11 +32,11 @@ protected:
      *  чем наплодить классов тучу, потерять красоту и простоту в этом.
      */
     virtual void loadData(std::ifstream& in){};
-    virtual void saveData(std::ofstream& out){};
+    virtual void saveData(std::ofstream& out)const{};
 
 private:
 
-    void init(uintchar id,uintchar size);
+    void init(unsigned int id, unsigned int size);
     uintchar id,size;
 
 };

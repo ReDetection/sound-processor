@@ -13,16 +13,17 @@
 class UnknownChunk: public WaveChunk {
 public:
     UnknownChunk();
+//    UnknownChunk(int a){};
     UnknownChunk(const UnknownChunk& orig);
     virtual ~UnknownChunk();
 
 
-    virtual const char *getData();
+    virtual const char *getData() const;
     
 
 protected:
     virtual void loadData(std::ifstream& in);
-    virtual void saveData(std::ofstream& out);
+    virtual void saveData(std::ofstream& out)const;
 
 private:
     char *data;
