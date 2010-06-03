@@ -8,6 +8,7 @@
 #include "DataChunk.h"
 
 DataChunk::DataChunk() {
+    format =0;
 }
 
 DataChunk::DataChunk(const DataChunk& orig) {

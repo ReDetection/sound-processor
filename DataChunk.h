@@ -22,7 +22,7 @@ public:
     const FormatChunk *getFormat()const;
 
 private:
-    const FormatChunk * format;
+    const FormatChunk* format;
 };
 
 #endif	/* _DATACHUNK_H */

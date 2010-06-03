@@ -81,6 +81,9 @@ public:
         return *p->data;
     }
 
+    T& operator[](int index){
+        return getItemByRef(index);
+    }
 
     void remove(int index) {
         if(index >= size || index < 0)
