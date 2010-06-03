@@ -7,6 +7,7 @@
 
 #include "WaveChunk.h"
 #include "UnknownChunk.h"
+#include "FormatChunk.h"
 
 WaveChunk::WaveChunk(){
     id.i=0;
@@ -32,9 +33,11 @@ WaveChunk* WaveChunk::load(std::ifstream& in){
     WaveChunk *chunk;
     
     switch (id.i){
-  //      case 544501094: //"fmt "
-
-          //  break;
+        case 544501094: //"fmt "
+            chunk = new FormatChunk();
+            break;
+        case 1635017060:// "data"
+            
         default:
             chunk = new UnknownChunk();
             break;

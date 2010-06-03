@@ -8,16 +8,16 @@
 #ifndef _WAVEFILE_H
 #define	_WAVEFILE_H
 #include "WaveEffect.h"
-#include "list.h"
+#include "List.h"
 #include "WaveChunk.h"
 
-class Wavefile {
+class WaveFile {
 public:
 
-    Wavefile(const char* filename);//load from file
+    WaveFile(const char* filename);//load from file
     //Wavefile(Waveheader &header);//create new one
-    Wavefile(const Wavefile& orig);
-    virtual ~Wavefile();
+    WaveFile(const WaveFile& orig);
+    virtual ~WaveFile();
 
     void applyEffect(WaveEffect *effect);
 

@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #include "Waveheader.h"
-#include "Wavefile.h"
+#include "WaveFile.h"
 
 Waveheader::Waveheader() {
     channels=blockAlign=bitsPerSample=0;

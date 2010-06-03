@@ -5,7 +5,6 @@
  * Created on 3 Июнь 2010 г., 12:49
  */
 
-#include <iostream>
 
 #include "FormatChunk.h"
 #include "WaveChunk.h"

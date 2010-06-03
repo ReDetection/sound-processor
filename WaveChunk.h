@@ -7,8 +7,8 @@
 
 #ifndef _WAVECHUNK_H
 #define	_WAVECHUNK_H
-#include "union.h"
 #include <fstream>
+#include "union.h"
 
 class WaveChunk {
 public:

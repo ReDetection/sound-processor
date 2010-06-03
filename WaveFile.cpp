@@ -5,13 +5,13 @@
  * Created on 23 Май 2010 г., 12:08
  */
 
-#include "Wavefile.h"
+#include "WaveFile.h"
 #include "union.h"
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
 
-Wavefile::Wavefile(const char* filename) {
+WaveFile::WaveFile(const char* filename) {
     std::ifstream in(filename,std::ios::in | std::ios::binary);
     in.exceptions( std::ios::failbit);
     uintchar t;
@@ -40,18 +40,18 @@ Wavefile::Wavefile(const char* filename) {
     }
 }
 
-Wavefile::Wavefile(const Wavefile& orig) {
+WaveFile::WaveFile(const WaveFile& orig) {
     throw "Не должен этот класс копироваться!";
 }
 
-Wavefile::~Wavefile() {
+WaveFile::~WaveFile() {
 }
 
-void Wavefile::applyEffect(WaveEffect *effect){
+void WaveFile::applyEffect(WaveEffect *effect){
 //    effect->apply((char*)data,hdr->dataSize, hdr->bitsPerSample/8);
     delete effect;
 }
 
-void Wavefile::store(const char* filename){
+void WaveFile::store(const char* filename){
     
 }
