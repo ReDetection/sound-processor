@@ -7,7 +7,7 @@
 
 #ifndef _WAVEFILE_H
 #define	_WAVEFILE_H
-#include "WaveEffect.h"
+#include "Effect.h"
 #include "List.h"
 #include "WaveChunk.h"
 
@@ -19,7 +19,7 @@ public:
     WaveFile(const WaveFile& orig);
     virtual ~WaveFile();
 
-    void applyEffect(WaveEffect *effect);
+    void applyEffect(Effect *effect);
 
     void store(const char* filename); //save into file
     

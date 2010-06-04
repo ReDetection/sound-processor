@@ -8,10 +8,10 @@
 #ifndef _AMPLIFIER_H
 #define	_AMPLIFIER_H
 
-#include "WaveEffect.h"
+#include "DiskreteEffect.h"
 
 
-class Amplifier:public WaveEffect {
+class Amplifier:public DiskreteEffect {
 public:
     Amplifier();
     Amplifier(float k);

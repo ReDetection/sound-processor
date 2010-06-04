@@ -10,7 +10,6 @@
 #include "Menu.h"
 #include "FileSelectorUI.h"
 #include "WaveFile.h"
-#include "WaveEffect.h"
 #include "Amplifier.h"
 #include "Normalizer.h"
 #include <stdio.h>
@@ -48,7 +47,7 @@ int main(int argc, char** argv) {
     
     try{
 //        WaveFile wave("/home/rd/Desktop/свалка/audiodump.wav");
-        WaveFile wave("/tmp/1.wav");
+        WaveFile wave("/tmp/3.wav");
         wave.applyEffect(new Normalizer());
         wave.store("/tmp/2.wav");
     }catch(const char* msg){

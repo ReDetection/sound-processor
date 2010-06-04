@@ -57,7 +57,7 @@ WaveFile::WaveFile(const WaveFile& orig) {
 WaveFile::~WaveFile() {
 }
 
-void WaveFile::applyEffect(WaveEffect *effect){
+void WaveFile::applyEffect(Effect *effect){
     for(int i=chunks.getSize()-1;i>=0;i--)
         if(chunks[i].getID() == WaveChunk::DATAID)
             effect->apply((DataChunk&)(chunks[i]));

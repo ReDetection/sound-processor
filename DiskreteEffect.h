@@ -8,14 +8,14 @@
 #ifndef _WAVEEFFECT_H
 #define	_WAVEEFFECT_H
 
-#include "DataChunk.h"
+#include "Effect.h"
 
 
-class WaveEffect {
+class DiskreteEffect :public Effect {
 public:
-    WaveEffect();
-    WaveEffect(const WaveEffect& orig);
-    virtual ~WaveEffect();
+    DiskreteEffect();
+    DiskreteEffect(const DiskreteEffect& orig);
+    virtual ~DiskreteEffect();
 
     //модифицируем сэмплики
     virtual char apply(char sample)const =0;
@@ -23,7 +23,7 @@ public:
 
     virtual void apply(DataChunk &samples);
     
-private:
+protected:
 
     unsigned int i;
 

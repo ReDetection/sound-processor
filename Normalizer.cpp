@@ -57,5 +57,5 @@ void Normalizer::apply(DataChunk& samples){
     }
 
     Amplifier::set(k);
-    WaveEffect::apply(samples);
+    DiskreteEffect::apply(samples);
 }
