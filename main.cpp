@@ -12,6 +12,7 @@
 #include "WaveFile.h"
 #include "Amplifier.h"
 #include "Normalizer.h"
+#include "Echo.h"
 #include <stdio.h>
 #include <fstream>
 /*
@@ -47,14 +48,14 @@ int main(int argc, char** argv) {
     
     try{
 //        WaveFile wave("/home/rd/Desktop/свалка/audiodump.wav");
-        WaveFile wave("/tmp/3.wav");
-        wave.applyEffect(new Normalizer());
+        WaveFile wave("/tmp/4.wav");
+ //       wave.applyEffect(new Amplifier(0.4));
+        wave.applyEffect(new Echo(1.0,0.5));
         wave.store("/tmp/2.wav");
     }catch(const char* msg){
         printf(msg);
 //        throw msg;
     }
-
 
 
 

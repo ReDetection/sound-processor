@@ -8,12 +8,19 @@
 #include "Echo.h"
 
 Echo::Echo() {
+    delay=1.0;
+}
+
+Echo::Echo(float delay, float volume) {
+    setDelay(delay);
+    setVolume(volume);
 }
 void Echo::setVolume(float volume) {
-    this->volume = volume;
+    Amplifier::set(volume);
+    
 }
 float Echo::getVolume() const {
-    return volume;
+    return Amplifier::get();
 }
 void Echo::setDelay(float delay) {
     this->delay = delay;
@@ -40,10 +47,10 @@ void Echo::apply(DataChunk& samples){
     for(unsigned int i=dl;i<count;i++){
         switch(bytePerSample){
             case 1:
-                data8[i]=apply(data8[i]);
+                data8[i]+=Amplifier::apply(data8[i-dl]);
                 break;
             case 2:
-                data16[i]=apply(data16[i]);
+                data16[i]+=Amplifier::apply(data16[i-dl]);
                 break;
             default:
                 throw "Такой битрейт пока не поддерживается";

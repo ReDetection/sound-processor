@@ -7,15 +7,16 @@
 
 #ifndef _ECHO_H
 #define	_ECHO_H
-#include "DiskreteEffect.h"
+#include "Amplifier.h"
 
-class Echo : public Effect{
+class Echo : public Amplifier {
 public:
     Echo();
+    Echo(float delay,float volume);
     Echo(const Echo& orig);
     virtual ~Echo();
 
-    void apply(DataChunk &samples);
+    virtual void apply(DataChunk &samples);
 
     void setVolume(float volume);
     float getVolume() const;
@@ -23,7 +24,7 @@ public:
     float getDelay() const;
 
 private:
-    float delay,volume;
+    float delay;
 
 };
 
