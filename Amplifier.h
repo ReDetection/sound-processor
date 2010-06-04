@@ -13,13 +13,16 @@
 
 class Amplifier:public WaveEffect {
 public:
+    Amplifier();
     Amplifier(float k);
     Amplifier(const Amplifier& orig);
     virtual ~Amplifier();
 
-
-    virtual char apply(char sample);
-    virtual short apply(short sample);
+    virtual void set(float k);
+    virtual float get()const;
+    
+    virtual char apply(char sample)const ;
+    virtual short apply(short sample)const;
 private:
     float k;
 };

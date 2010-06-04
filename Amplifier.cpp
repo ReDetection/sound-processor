@@ -7,6 +7,9 @@
 
 #include "Amplifier.h"
 
+Amplifier::Amplifier() {
+    k=1.0;
+}
 Amplifier::Amplifier(float k) {
     this->k=k;
 }
@@ -18,9 +21,17 @@ Amplifier::Amplifier(const Amplifier& orig) {
 Amplifier::~Amplifier() {
 }
 
-char Amplifier::apply(char sample){
+char Amplifier::apply(char sample)const{
     return (sample-0x80)*k + 0x80;
 }
-short Amplifier::apply(short sample){
+short Amplifier::apply(short sample)const{
     return sample*k;
+}
+
+void Amplifier::set(float k){
+    this->k=k;
+}
+
+float Amplifier::get()const{
+    return k;
 }
