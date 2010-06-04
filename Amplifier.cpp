@@ -12,6 +12,7 @@ Amplifier::Amplifier(float k) {
 }
 
 Amplifier::Amplifier(const Amplifier& orig) {
+    throw "Не должен этот класс копироваться!";
 }
 
 Amplifier::~Amplifier() {

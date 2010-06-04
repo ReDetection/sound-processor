@@ -13,6 +13,7 @@ FormatChunk::FormatChunk() {
 }
 
 FormatChunk::FormatChunk(const FormatChunk& orig) {
+    throw "Не должен этот класс копироваться!";
 }
 
 FormatChunk::~FormatChunk() {
