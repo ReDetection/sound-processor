@@ -6,7 +6,6 @@
  */
 
 #include "Compressor.h"
-#include <stdio.h>
 
 inline int abs(int a){
     return a>=0 ? a : -a;
@@ -34,7 +33,6 @@ void Compressor::setKnee(double iknee,double oknee) {
     float b2=(1.0-a2);
     bc = b2*127.0;
     bs = b2*32767.0;
-    printf("%f %f %f\n",a1,a2,b2);
 }
 float Compressor::getIknee() const {
     return iknee;
