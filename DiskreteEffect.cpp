@@ -10,7 +10,6 @@
 #include "DiskreteEffect.h"
 
 DiskreteEffect::DiskreteEffect() {
-    i=0;
 }
 
 DiskreteEffect::DiskreteEffect(const DiskreteEffect& orig) {
@@ -20,13 +19,13 @@ DiskreteEffect::DiskreteEffect(const DiskreteEffect& orig) {
 DiskreteEffect::~DiskreteEffect() {
 }
 
-void DiskreteEffect::apply(DataChunk &samples){
+void DiskreteEffect::apply(DataChunk &samples)const{
     unsigned short bytePerSample=samples.getFormat()->bitsPerSample()/8;
     unsigned int count=samples.getSize()/bytePerSample; //samples count
     char *data8 = samples.getData();
     short *data16 = (short*)data8;
 
-    for(i=0;i<count;i++){
+    for(unsigned int i=0;i<count;i++){
         switch(bytePerSample){
             case 1:
                 data8[i]=apply(data8[i]);

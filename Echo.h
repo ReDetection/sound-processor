@@ -16,7 +16,7 @@ public:
     Echo(const Echo& orig);
     virtual ~Echo();
 
-    virtual void apply(DataChunk &samples);
+    virtual void apply(DataChunk &samples)const;
 
     void setVolume(float volume);
     float getVolume() const;

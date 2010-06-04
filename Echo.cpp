@@ -37,7 +37,7 @@ Echo::~Echo() {
 }
 
 
-void Echo::apply(DataChunk& samples){
+void Echo::apply(DataChunk& samples)const{
     unsigned short bytePerSample=samples.getFormat()->bitsPerSample()/8;
     unsigned int count=samples.getSize()/bytePerSample; //samples count
     char *data8 = samples.getData();

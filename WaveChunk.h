@@ -24,7 +24,7 @@ public:
     unsigned int getID()const;
 
     static WaveChunk *load(std::ifstream& in);
-    void save(std::ofstream& out);
+    void save(std::ofstream& out)const;
 
 protected:
     

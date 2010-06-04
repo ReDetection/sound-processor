@@ -13,7 +13,7 @@
 class Effect {
 public:
     
-    virtual void apply(DataChunk &samples)=0;
+    virtual void apply(DataChunk &samples)const=0;
 private:
 
 };

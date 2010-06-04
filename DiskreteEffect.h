@@ -21,11 +21,7 @@ public:
     virtual char apply(char sample)const =0;
     virtual short apply(short sample)const =0;
 
-    virtual void apply(DataChunk &samples);
-    
-protected:
-
-    unsigned int i;
+    virtual void apply(DataChunk &samples)const;
 
 };
 

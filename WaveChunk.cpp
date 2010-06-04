@@ -50,7 +50,7 @@ WaveChunk* WaveChunk::load(std::ifstream& in){
 
 }
 
-void WaveChunk::save(std::ofstream& out){
+void WaveChunk::save(std::ofstream& out)const{
     out.write(id.c,4);
     out.write(size.c,4);
     saveData(out);
