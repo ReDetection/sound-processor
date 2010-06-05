@@ -21,10 +21,10 @@ Amplifier::Amplifier(const Amplifier& orig) {
 Amplifier::~Amplifier() {
 }
 
-char Amplifier::apply(char sample)const{
+char Amplifier::apply(char sample){
     return (sample-0x80)*k + 0x80;
 }
-short Amplifier::apply(short sample)const{
+short Amplifier::apply(short sample){
     return sample*k;
 }
 

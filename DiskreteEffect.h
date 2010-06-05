@@ -18,10 +18,10 @@ public:
     virtual ~DiskreteEffect();
 
     //модифицируем сэмплики
-    virtual char apply(char sample)const =0;
-    virtual short apply(short sample)const =0;
+    virtual char apply(char sample) =0;
+    virtual short apply(short sample) =0;
 
-    virtual void apply(DataChunk &samples)const;
+    virtual void apply(DataChunk &samples);
 
 };
 

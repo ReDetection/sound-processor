@@ -38,7 +38,7 @@ float Compressor::getIknee() const {
     return iknee;
 }
 
-char Compressor::apply(char sample)const{
+char Compressor::apply(char sample){
     int val =  (sample-0x80);
     if(abs(val)<=128.0*iknee)
         val*=a1;
@@ -47,7 +47,7 @@ char Compressor::apply(char sample)const{
     return val + 0x80;
 };
 
-short Compressor::apply(short sample)const{
+short Compressor::apply(short sample){
     if(abs(sample)<=32768.0*iknee)
         return sample*a1;
     else

@@ -21,8 +21,8 @@ public:
     virtual void set(float k);
     virtual float get()const;
     
-    virtual char apply(char sample)const ;
-    virtual short apply(short sample)const;
+    virtual char apply(char sample) ;
+    virtual short apply(short sample);
 private:
     float k;
 };

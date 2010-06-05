@@ -15,8 +15,8 @@ public:
     Compressor(const Compressor& orig);
     virtual ~Compressor();
     
-    virtual char apply(char sample)const;
-    virtual short apply(short sample)const;
+    virtual char apply(char sample);
+    virtual short apply(short sample);
 
     void setKnee(double iknee,double oknee);
     float getOknee() const;

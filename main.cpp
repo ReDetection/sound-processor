@@ -14,6 +14,7 @@
 #include "Normalizer.h"
 #include "Echo.h"
 #include "Compressor.h"
+#include "Distortion.h"
 #include <stdio.h>
 #include <fstream>
 /*
@@ -49,15 +50,15 @@ int main(int argc, char** argv) {
     
     try{
         WaveFile wave("/home/rd/Desktop/свалка/audiodump.wav");
+//        WaveFile wave("/tmp/3struna.wav");
 //        WaveFile wave("/tmp/sin.wav");
-//        wave.applyEffect(new Amplifier(0.4));
-        wave.applyEffect(new Compressor(0.5,0.74));
+//        wave.applyEffect(new Compressor(0.5,0.75));
+        wave.applyEffect(new Distortion());
         wave.store("/tmp/2.wav");
     }catch(const char* msg){
         printf(msg);
 //        throw msg;
     }
-
 
 
     return (0);
