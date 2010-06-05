@@ -19,13 +19,17 @@ public:
     virtual char apply(char sample);
     virtual short apply(short sample);
 
+    virtual void apply(DataChunk &samples);
+
 private:
 
+    inline short modabs(short a,short mod);
     short calc(short a);
 
     float s;
-    short samples;
+    short samples,smiddle;
 
+    short clip;
 };
 
 #endif	/* _DISTORTION_H */
