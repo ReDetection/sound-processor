@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
     
     try{
 //        WaveFile wave("/home/rd/Desktop/свалка/audiodump.wav");
-        WaveFile wave("/tmp/lin.wav");
+        WaveFile wave("/tmp/sin.wav");
 //        WaveFile wave("/tmp/sin.wav");
 //        wave.applyEffect(new Compressor(0.5,0.75));
         wave.applyEffect(new Distortion());
