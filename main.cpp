@@ -49,9 +49,9 @@ int main(int argc, char** argv) {
 //    printf("\n\n%s\n",fselector.select());
     
     try{
-        WaveFile wave("/home/rd/Desktop/свалка/audiodump.wav");
+//        WaveFile wave("/home/rd/Desktop/свалка/audiodump.wav");
 //        WaveFile wave("/tmp/3struna.wav");
-//        WaveFile wave("/tmp/sin.wav");
+        WaveFile wave("/tmp/sin.wav");
 //        wave.applyEffect(new Compressor(0.5,0.75));
         wave.applyEffect(new Distortion());
         wave.store("/tmp/2.wav");

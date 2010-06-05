@@ -40,9 +40,9 @@ short Distortion::apply(short sample){
 
 short Distortion::calc(short a){
     a=abs(a);
-    if(samples<100)
+    if(samples<50)
         s=(s*samples + a)/(samples++ + 1);
     else
-        s=(s*99+a)/100;
+        s=(s*49+a)/50;
     return s ;
 }
