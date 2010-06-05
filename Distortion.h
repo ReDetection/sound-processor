@@ -23,8 +23,8 @@ public:
 
 private:
 
-    inline short modabs(short a,short mod);
-    short calc(short a);
+    inline short calc(short a,short mod);
+    short middle(short a);
 
     float s;
     short samples,smiddle;

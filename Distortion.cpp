@@ -11,7 +11,10 @@ inline short abs(short a){
 inline short sign(short a){
     return a>=0? 1: -1;
 }
-short Distortion::modabs(short a,short mod){
+//inline short amdl(short a,short b){ //for overdrive test
+//    return (a+a+b)/3;
+//}
+short Distortion::calc(short a,short mod){
     if(abs(a)>mod){
         if(clip==0)
             clip=mod;
@@ -41,14 +44,14 @@ Distortion::~Distortion() {
 
 
 char Distortion::apply(char sample){
-    return modabs(sample-0x80,calc(sample-0x80)) + 0x80;
+    return calc(sample-0x80,middle(sample-0x80)) + 0x80;
 }
 short Distortion::apply(short sample){
-    return modabs(sample,calc(sample));
+    return calc(sample,middle(sample));
 
 }
 
-short Distortion::calc(short a){
+short Distortion::middle(short a){
     a=abs(a);
     if(a<5)return s;
     if(samples<smiddle)
