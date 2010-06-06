@@ -16,7 +16,6 @@ public:
     virtual ~Distortion();
 
 protected:
-    virtual char apply(char sample);
     virtual short apply(short sample);
 
     virtual void apply(DataChunk &samples);

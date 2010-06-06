@@ -44,16 +44,18 @@ void Echo::apply(DataChunk& samples){
     short *data16 = (short*)data8;
     unsigned int dl = samples.getFormat()->getAvgBytesPerSec()/bytePerSample*delay;
 
-    for(unsigned int i=dl;i<count;i++){
-        switch(bytePerSample){
-            case 1:
-                data8[i]+=Amplifier::apply(data8[i-dl]);
-                break;
-            case 2:
-                data16[i]+=Amplifier::apply(data16[i-dl]);
-                break;
-            default:
-                throw "Такой битрейт пока не поддерживается";
-        }
+    switch (bytePerSample) {
+    case 1:
+        maxint=127;
+        for(unsigned int i=dl;i<count;i++)
+            data8[i]+=Amplifier::apply(data8[i-dl]-0x80)+0x80;
+        break;
+    case 2:
+        maxint=32767;
+        for(unsigned int i=dl;i<count;i++)
+            data16[i]=Amplifier::apply(data16[i-dl]);
+        break;
+    default:
+        throw "Такой битрейт пока не поддерживается";
     }
 }

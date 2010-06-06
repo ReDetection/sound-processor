@@ -18,7 +18,6 @@ public:
     virtual void apply(DataChunk &samples);
 
 protected:
-    virtual char apply(char sample);
     virtual short apply(short sample);
     
 private:

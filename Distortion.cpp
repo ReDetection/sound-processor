@@ -42,10 +42,6 @@ Distortion::Distortion(const Distortion& orig) {
 Distortion::~Distortion() {
 }
 
-
-char Distortion::apply(char sample){
-    return calc(sample-0x80,middle(sample-0x80)) + 0x80;
-}
 short Distortion::apply(short sample){
     return calc(sample,middle(sample));
 

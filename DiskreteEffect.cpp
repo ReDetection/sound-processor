@@ -25,17 +25,19 @@ void DiskreteEffect::apply(DataChunk &samples){
     char *data8 = samples.getData();
     short *data16 = (short*)data8;
 
-    for(unsigned int i=0;i<count;i++){
-        switch(bytePerSample){
-            case 1:
-                data8[i]=apply(data8[i]);
-                break;
-            case 2:
+    switch (bytePerSample) {
+        case 1:
+            maxint=127;
+            for(unsigned int i=0;i<count;i++)
+                data8[i]=apply(data8[i]-0x80)+0x80;
+            break;
+        case 2:
+            maxint=32767;
+            for(unsigned int i=0;i<count;i++)
                 data16[i]=apply(data16[i]);
-                break;
-            default:
-                throw "Такой битрейт пока не поддерживается";
-        }
+            break;
+        default:
+            throw "Такой битрейт пока не поддерживается";
     }
 }
 

@@ -21,8 +21,8 @@ public:
 
 protected:
 
+    int maxint;
     //модифицируем сэмплики
-    virtual char apply(char sample) =0;
     virtual short apply(short sample) =0;
 
 };

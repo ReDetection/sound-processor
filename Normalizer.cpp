@@ -27,35 +27,28 @@ Normalizer::~Normalizer() {
 void Normalizer::apply(DataChunk& samples){
     unsigned short bytePerSample=samples.getFormat()->bitsPerSample()/8;
     unsigned int count=samples.getSize()/bytePerSample; //samples count
-    char *data = samples.getData();
+    char *data8 = samples.getData();
+    short *data16 = (short*)data8;
 
     short maxs =0,tmps;
     float k=0;
 
-    for(int i=0;i<count;i++,data+=bytePerSample){
-        switch(bytePerSample){
-            case 1:
-                tmps=abs(*((char*)data) - 80);
-                break;
-            case 2:
-                tmps=abs(*((short*)data));
-                break;
-            default:
-                throw "Такой битрейт пока не поддерживается";
-        }
-        maxs= maxs<tmps ? tmps : maxs;
-
-    }
-
-    switch(bytePerSample){
+    switch (bytePerSample) {
         case 1:
-            k=127.0/maxs;
+            maxint=127;
+            for(unsigned int i=0;i<count;i++)
+                maxs= maxs<data8[i]-0x80 ? data8[i]-0x80 : maxs;
             break;
         case 2:
-            k=32767.0/maxs;
+            maxint=32767;
+            for(unsigned int i=0;i<count;i++)
+                maxs= maxs<data16[i] ? data16[i] : maxs;
             break;
+        default:
+            throw "Такой битрейт пока не поддерживается";
     }
 
+    k=maxint/maxs;
     Amplifier::set(k);
     DiskreteEffect::apply(samples);
 }

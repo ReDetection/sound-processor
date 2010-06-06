@@ -11,9 +11,9 @@ inline short abs(short a){
 inline short sign(short a){
     return a>=0? 1: -1;
 }
-//inline short amdl(short a,short b){ //for overdrive test
-//    return (a+a+b)/3;
-//}
+inline short amdl(short a,short b){ //for overdrive test
+    return (a+a+b)/3;
+}
 short Overdrive::calc(short a,short mod){
     if(abs(a)>mod){
         return mod*sign(a);
@@ -33,12 +33,8 @@ Overdrive::Overdrive(const Overdrive& orig) {
 Overdrive::~Overdrive() {
 }
 
-
-char Overdrive::apply(char sample){
-    return calc(sample-0x80,middle(sample-0x80)) + 0x80;
-}
 short Overdrive::apply(short sample){
-    return calc(sample,middle(sample));
+    return amdl(calc(sample,middle(sample)),sample);
 
 }
 
