@@ -36,6 +36,10 @@ public:
     int add(char* string);
     int addClone(const char*string);
 
+    int appendConst(const char* string);
+    int append(char* string);
+    int appendClone(const char* string);
+
     void raiseUp(int which);
 
     int getSize()const;//возвращает не size, а количество занятых мест в массиве!

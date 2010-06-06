@@ -62,17 +62,6 @@ int StringArray::getSize()const{
 void StringArray::store(std::ofstream& out)const{
     char ID='S';
     out.write(&ID, 1);
-//    int size = getSize();
-//    out.write((const char *)&size,sizeof(int));
-//    for(int i=0,k=0;i<size && k<this->size;i++,k++){
-//        if(native[i]==ITEMFREE){
-//            i--;
-//            continue;
-//        }
-//        int t = strlen(array[i]);
-//        out.write((const char *)&t,sizeof(int));
-//        out.write(array[i],t);
-//    }
     int len = array.getSize();
     out.write((char*)&len,sizeof(int));
     for(int i=0;i<len;i++)
@@ -88,24 +77,22 @@ void StringArray::load(std::ifstream &in){
         in.seekg(-1);
         return; //TODO: или сделать исключение?
     }
-//    destroy();//очистим-ка все по-ленивому :3
-//    allocate();
-//
-//    //загружаемся из потока
-//    in.read((char *)&size,sizeof(int));
-//    for(int i=0;i<size;i++){
-//        int len;
-//        char *str;
-//        in.read((char *)&len,sizeof(int));
-//        str =(char*) malloc(len+1);
-//        str[len]=0;
-//        in.read(str,len);
-//        put(str,i);
-//    }
     in.read((char*)&size,sizeof(int));
     for(int i=0;i<size;i++){
         String *a = new String();
         a->restore(in);
         array.append(a);
     }
+}
+
+int StringArray::appendConst(const char* string){
+    return array.append(new String(string));
+}
+int StringArray::append(char* string){
+    String *s = new String();
+    s->set(string);
+    return array.append(s);
+}
+int StringArray::appendClone(const char* string){
+    return append(strdup(string));
 }

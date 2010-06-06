@@ -28,16 +28,17 @@ EditUI::~EditUI() {
 void EditUI::ui(WaveFile& wave){
     this->wave=&wave;
 
-    menu->choose();
+    int result = menu->choose();
+    //TODO:продолжение. свитч и все такое
 }
 
 void EditUI::init(){
-    items.addConst("Усилитель");
-    items.addConst("Нормализация");
-    items.addConst("Эхо");
-    items.addConst("Компрессия");
-    items.addConst("Перегруз");
-    items.addConst("Дисторшн");
+    items.appendConst("Усилитель");
+    items.appendConst("Нормализация");
+    items.appendConst("Эхо");
+    items.appendConst("Компрессия");
+    items.appendConst("Перегруз");
+    items.appendConst("Дисторшн");
     menu = new MenuUI(&items,"Выберите эффект");
     menu->setBack("Закончить редактирование");
 }
