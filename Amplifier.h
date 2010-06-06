@@ -20,7 +20,8 @@ public:
 
     virtual void set(float k);
     virtual float get()const;
-    
+
+protected:
     virtual char apply(char sample) ;
     virtual short apply(short sample);
 private:

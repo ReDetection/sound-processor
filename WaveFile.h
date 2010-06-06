@@ -19,6 +19,7 @@ public:
     WaveFile(const WaveFile& orig);
     virtual ~WaveFile();
 
+    bool wasError();
     void applyEffect(Effect *effect);
 
     void store(const char* filename); //save into file
@@ -27,6 +28,7 @@ public:
 private:
     List<WaveChunk> chunks;
     int globalsize;
+    bool waserror;
 };
 
 #endif	/* _WAVEFILE_H */

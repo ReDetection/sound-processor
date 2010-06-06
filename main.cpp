@@ -51,13 +51,15 @@ int main(int argc, char** argv) {
     
     try{
 //        WaveFile wave("/home/rd/Desktop/свалка/audiodump.wav");
-//        WaveFile wave("/tmp/ang.wav");
-        WaveFile wave("/tmp/lin1.wav");
-        wave.applyEffect(new Compressor(0.5,0.75));
+        WaveFile wave("/tmp/2.wav");
+//        WaveFile wave("/tmp/lin1.wav");
+//        wave.applyEffect(new Compressor(0.5,0.75));
 //        wave.applyEffect(new Overdrive());
 //        wave.applyEffect(new Distortion());
-//        wave.applyEffect(new Amplifier(1.0/1.5));
-//        wave.applyEffect(new Echo(0.03,0.7));
+//        wave.applyEffect(new Amplifier(1.0/1.3));
+        wave.applyEffect(new Echo(0.025,0.8));
+        wave.applyEffect(new Distortion());
+//        wave.applyEffect(new Overdrive());
 //        wave.applyEffect(new Echo(0.07,0.5));
 //        wave.applyEffect(new Echo(0.12,0.3));
         wave.store("/tmp/3.wav");

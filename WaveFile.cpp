@@ -45,9 +45,14 @@ WaveFile::WaveFile(const char* filename) {
                     break;
             }
         }
+        waserror=false;
     }catch(std::ios::failure f){
-            throw "Неожиданный конец файла";
+        waserror=true;
     }
+}
+
+bool WaveFile::wasError(){
+    return waserror;
 }
 
 WaveFile::WaveFile(const WaveFile& orig) {

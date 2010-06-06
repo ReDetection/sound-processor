@@ -14,13 +14,15 @@ public:
     Compressor(double iknee,double oknee);
     Compressor(const Compressor& orig);
     virtual ~Compressor();
-    
-    virtual char apply(char sample);
-    virtual short apply(short sample);
 
     void setKnee(double iknee,double oknee);
     float getOknee() const;
     float getIknee() const;
+
+protected:
+    virtual char apply(char sample);
+    virtual short apply(short sample);
+    
 private:
     double iknee,oknee;
     double a1,a2,bc,bs;

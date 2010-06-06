@@ -17,11 +17,13 @@ public:
     DiskreteEffect(const DiskreteEffect& orig);
     virtual ~DiskreteEffect();
 
+    virtual void apply(DataChunk &samples);
+
+protected:
+
     //модифицируем сэмплики
     virtual char apply(char sample) =0;
     virtual short apply(short sample) =0;
-
-    virtual void apply(DataChunk &samples);
 
 };
 

@@ -15,12 +15,12 @@ public:
     Overdrive(const Overdrive& orig);
     virtual ~Overdrive();
 
-
-    virtual char apply(char sample);
-    virtual short apply(short sample);
-
     virtual void apply(DataChunk &samples);
 
+protected:
+    virtual char apply(char sample);
+    virtual short apply(short sample);
+    
 private:
 
     inline short calc(short a,short mod);
