@@ -27,7 +27,7 @@ public:
 private:
     WaveFile *wave;
     MenuUI *menu;
-    StringArray *items;
+    StringArray items;
 };
 
 #endif	/* _EDITUI_H */

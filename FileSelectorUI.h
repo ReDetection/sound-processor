@@ -7,7 +7,7 @@
 
 #ifndef _FILESELECTORUI_H
 #define	_FILESELECTORUI_H
-#include "Menu.h"
+#include "MenuUI.h"
 #include "StringArray.h"
 
 class FileSelectorUI {
@@ -21,7 +21,7 @@ public:
 
 private:
     StringArray elems;//пункты меню
-    Menu menu;
+    MenuUI menu;
 
 };
 

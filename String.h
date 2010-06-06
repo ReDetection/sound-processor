@@ -5,8 +5,9 @@
  * Created on 6 Июнь 2010 г., 23:36
  */
 
-#ifndef _STRING_H
-#define	_STRING_H
+#ifndef _MYSTRING_H
+#define	_MYSTRING_H
+#include <fstream>
 
 class String {
 public:
@@ -20,6 +21,8 @@ public:
     void set(char *str);//присваивает себе. при удалении объекта, освободит память
 
     const char* get()const;
+    void store(std::ofstream& out)const;
+    void restore(std::ifstream& in);
 
 private:
     inline void release();

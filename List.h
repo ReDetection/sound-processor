@@ -9,7 +9,6 @@
 
 #include <iostream>
 
-using namespace std;
 template<class T>
 class List {
     class ListItem {
@@ -44,7 +43,7 @@ public:
 
 
     /*
-     * добавление нового элемента
+     * добавление нового элемента в хвост
      * возвращает индекс нового элемента или -1, если не хватило памяти
      */
     int append(T *value){
@@ -109,6 +108,47 @@ public:
         pre->next=post;
         delete p;
     }
+    /*
+     * добавляет элемент в список по определенному порядковому номеру. существующие, начиная с заданного порядкового номера сдвигаются вправо.
+     * возвращает индекс добавленного элемента в случае успеха и -1 иначе.
+     */
+    int append(T *value,int index){
+        if(index>=size)
+            return append(value);
+
+        ListItem *n = new ListItem(value);
+        if(n==0)
+            return -1;
+
+        if(index<=0){
+            n->next = head;
+            head = n;
+            size++;
+            return 0;
+        }
+
+        ListItem *p=head;
+        for(int i=1;i<index;i++,p=p->next);
+        n->next = p->next;
+        p->next = n;
+        size++;
+        return index;
+    }
+
+    void raiseUp(int index){
+        if(index==0 || size<2)
+            return;
+        
+        ListItem *pre=head,*p;
+        for(int i=1;i<index && i<size;i++,pre=pre->next);
+        p=pre->next;
+        pre->next=pre->next->next;
+        p->next=head;
+        head=p;
+        if(head==end)
+            end=pre;
+    }
+
 //	void removeItem(T& item) {
 //		remove(getIndex(item));
 //	}
@@ -266,7 +306,7 @@ public:
 //    			return added;
 //    	return added;
 //    }
-
+//
 //    /*
 //     * создает в памяти массив из элементов списка и его возвращает
 //     */
@@ -277,7 +317,7 @@ public:
 //    		result[i]=p->data;
 //    	return result;
 //    }
-
+//
 //    /*
 //     * добавляет содержимое списка list в хвост текущего.
 //     * возвращает количество добавленных элементов
@@ -303,38 +343,13 @@ public:
 //    }
 //
 //	List(List& clone){
-//		head = 0;
-//		size=0;
-//		end=0;
-//    	append(clone);
+//            head = 0;
+//            size=0;
+//            end=0;
+//            append(clone);
 //	}
 
-//	/*
-//	 * добавляет элемент в список по определенному порядковому номеру. существующие, начиная с заданного порядкового номера сдвигаются вправо.
-//	 * возвращает индекс добавленного элемента в случае успеха и -1 иначе.
-//	 */
-//	int append(T &value,int index){
-//		if(index>=size)
-//			return append(value);
-//
-//		ListItem *n = new ListItem(value);
-//		if(n==0)
-//			return -1;
-//
-//		if(index<=0){
-//			n->next = head;
-//			head = n;
-//			size++;
-//			return 0;
-//		}
-//
-//		ListItem *p=head;
-//		for(int i=1;i<index;i++,p=p->next);
-//		n->next = p->next;
-//		p->next = n;
-//		size++;
-//		return index;
-//	}
+
 //	int getIndex(T& item) const {
 //		int result = 0;
 //		ListItem *p=head;

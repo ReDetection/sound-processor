@@ -14,14 +14,14 @@
 class WaveFile {
 public:
 
-    WaveFile(const char* filename);//load from file
-    //Wavefile(Waveheader &header);//create new one
+    WaveFile();//load from file
     WaveFile(const WaveFile& orig);
     virtual ~WaveFile();
 
     bool wasError();
     void applyEffect(Effect *effect);
 
+    bool load(const char* filename);//load from file
     void store(const char* filename); //save into file
     
 

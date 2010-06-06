@@ -7,9 +7,12 @@
 
 #include "String.h"
 #include <cstring>
+#include <cstdlib>
+#include <iostream>
 
 String::String() {
     state=FREE;
+
 }
 String::String(const char* str){
     data=(char*)str;
@@ -33,7 +36,7 @@ void String::load(const char *str){
     data=strdup(str);
 }
 void String::release(){
-    if(state=MY)
+    if(state==MY)
         free(data);
 }
 
@@ -47,4 +50,19 @@ void String::set(char* str){
     state=MY;
     data=str;
 }
-
+void String::store(std::ofstream& out)const{
+    if(state==FREE)
+        throw "ээ, где-то я навалял, не должно быть тут такого";
+    int len = strlen(data);
+    out.write((char*)&len,sizeof(int));
+    out.write(data,len);
+}
+void String::restore(std::ifstream& in){
+    release();
+    state=MY;
+    int len;
+    in.read((char*)&len,sizeof(int));
+    data = (char*)malloc(len+1);
+    in.read(data,len);
+    data[len]=0;
+}

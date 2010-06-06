@@ -14,7 +14,7 @@
 
 class MenuUI {
 public:
-    MenuUI(const List<std::string>* elem,const char * hint);
+    MenuUI(const StringArray* elem,const char * hint);
     MenuUI(const MenuUI& orig);
     MenuUI();
 
@@ -23,12 +23,12 @@ public:
     int chooseIndex()const;
     const char *choose()const;
 
-    void setElements(const List<std::string>* elem);
+    void setElements(const StringArray* elem);
     void setHint(const char * hint);
     void setBack(const char *hint);
 
 protected:
-    const List<std::string> *items;
+    const StringArray *items;
     const char *hint,*back;
 private:
 

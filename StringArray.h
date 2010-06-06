@@ -13,10 +13,13 @@
 #define	_STRINGARRAY_H
 #include <fstream>
 
+#include "List.h"
+#include "String.h"
+
 class StringArray {
 public:
     StringArray();
-    StringArray(int count);
+//    StringArray(int count);
     StringArray(const StringArray& orig);
     virtual ~StringArray();
 
@@ -24,14 +27,14 @@ public:
     const char* get(int n)const;
 
     //жесткая вставка в строго указанное место
-    void putConst(const char* string, int place);
-    void put(char* string, int place);
-    void putClone(const char*string, int place);
+    int putConst(const char* string, int place);
+    int put(char* string, int place);
+    int putClone(const char*string, int place);
 
     //вставка в начало(автоматический сдвиг)
-    void addConst(const char* string);
-    void add(char* string);
-    void addClone(const char*string);
+    int addConst(const char* string);
+    int add(char* string);
+    int addClone(const char*string);
 
     void raiseUp(int which);
 
@@ -41,20 +44,20 @@ public:
     void load(std::ifstream& in);
 
 protected:
-    int size;
-    char **array;
-    /*
-     * массив состояний соответствующих элементов из array.
-     * (const/не-const, занят/свободен..)
-     * свободен = 0, изменяемый = 1, константный = 2
-     */
-    char *native;
+//    int size;
+    List<String> array;
+//    /*
+//     * массив состояний соответствующих элементов из array.
+//     * (const/не-const, занят/свободен..)
+//     * свободен = 0, изменяемый = 1, константный = 2
+//     */
+//    char *native;
 
 
 private:
-    void allocate();
-    void shift();//сдвиг элементов массива на 1 элемент в сторону
-    void destroy();//мне надо вызвать деструктор без разрушения самого объкета
+//    void allocate();
+//    void shift();//сдвиг элементов массива на 1 элемент в сторону
+//    void destroy();//мне надо вызвать деструктор без разрушения самого объкета
 };
 
 #endif	/* _STRINGARRAY_H */

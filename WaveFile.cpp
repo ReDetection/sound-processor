@@ -9,11 +9,14 @@
 #include "union.h"
 #include "FormatChunk.h"
 #include "DataChunk.h"
-#include <iostream>
 #include <fstream>
-#include <cstdlib>
 
-WaveFile::WaveFile(const char* filename) {
+WaveFile::WaveFile(){
+    waserror=true;
+}
+
+bool WaveFile::load(const char* filename) {
+    bool fmtExist=false,wvExist=false;
     std::ifstream in(filename,std::ios::in | std::ios::binary);
     in.exceptions( std::ios::failbit);
     uintchar t;
@@ -22,6 +25,7 @@ WaveFile::WaveFile(const char* filename) {
         in.read(t.c,4);
         if( t.i!= 1179011410 ) // "RIFF"
             throw "This is not wavefile";
+//            return false;
 
         in.read(t.c,4);
         globalsize=t.i;
@@ -29,6 +33,7 @@ WaveFile::WaveFile(const char* filename) {
         in.read(t.c,4);
         if( t.i!= 1163280727 ) // "WAVE"
             throw "This is not wavefile";
+//            return false;
 
         const FormatChunk *lastformat;
         for(unsigned int i=4;i<globalsize;){
@@ -38,9 +43,11 @@ WaveFile::WaveFile(const char* filename) {
             i+=8;
             switch (chunk->getID()){
                 case WaveChunk::FORMATID:
+                    fmtExist=true;
                     lastformat=(const FormatChunk*)chunk;
                     break;
                 case WaveChunk::DATAID:
+                    wvExist=true;
                     ((DataChunk*)chunk)->assignFormat(lastformat);
                     break;
             }
@@ -49,6 +56,7 @@ WaveFile::WaveFile(const char* filename) {
     }catch(std::ios::failure f){
         waserror=true;
     }
+    return fmtExist && wvExist;
 }
 
 bool WaveFile::wasError(){

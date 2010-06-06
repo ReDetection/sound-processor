@@ -22,7 +22,6 @@ EditUI::EditUI(const EditUI& orig) {
 }
 
 EditUI::~EditUI() {
-    delete items;
     delete menu;
 }
 
@@ -33,14 +32,13 @@ void EditUI::ui(WaveFile& wave){
 }
 
 void EditUI::init(){
-    items=new StringArray(20);
-    items->addConst("Усилитель");
-    items->addConst("Нормализация");
-    items->addConst("Эхо");
-    items->addConst("Компрессия");
-    items->addConst("Перегруз");
-    items->addConst("Дисторшн");
-    menu = new MenuUI(items,"Выберите эффект");
+    items.addConst("Усилитель");
+    items.addConst("Нормализация");
+    items.addConst("Эхо");
+    items.addConst("Компрессия");
+    items.addConst("Перегруз");
+    items.addConst("Дисторшн");
+    menu = new MenuUI(&items,"Выберите эффект");
     menu->setBack("Закончить редактирование");
 }
 
