@@ -76,6 +76,9 @@ int main(int argc, char** argv) {
 
     EditUI ui(wave);
     
+    wave.store(selector.select());
+
+    
     return (0);
 }
 

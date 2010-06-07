@@ -28,6 +28,11 @@ private:
     WaveFile *wave;
     MenuUI *menu;
     StringArray items;
+
+    float input(const char * hint)const;
+
+    int amp,nor, echo,com,over,dist;
+
 };
 
 #endif	/* _EDITUI_H */

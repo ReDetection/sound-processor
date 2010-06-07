@@ -53,7 +53,7 @@ void Echo::apply(DataChunk& samples){
     case 2:
         maxint=32767;
         for(unsigned int i=dl;i<count;i++)
-            data16[i]=Amplifier::apply(data16[i-dl]);
+            data16[i]+=Amplifier::apply(data16[i-dl]);
         break;
     default:
         throw "Такой битрейт пока не поддерживается";
