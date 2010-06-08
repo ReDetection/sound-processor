@@ -74,13 +74,13 @@ public:
         return p->data;
     }
 
-    T& getItemByRef(int index){
+    T& getItemByRef(int index)const{
         ListItem *p=head;
         for(int i=0;i<index;i++,p=p->next);
         return *p->data;
     }
 
-    T& operator[](int index){
+    T& operator[](int index)const{
         return getItemByRef(index);
     }
 

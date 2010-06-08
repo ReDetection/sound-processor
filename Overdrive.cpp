@@ -22,7 +22,7 @@ short Overdrive::calc(short a,short mod){
         clip=0;
         return a;
     }else{
-        if(abs(a)>mod*1.25){
+        if(abs(a)>mod){
             clip=mod;
             return clip*sign(a);
         }

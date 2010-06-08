@@ -20,12 +20,14 @@ public:
 
     bool wasError();
     void applyEffect(Effect *effect);
+    void applyEffects(const List<Effect> &effects);
 
     bool load(const char* filename);//load from file
     void store(const char* filename); //save into file
     
 
 private:
+    void applyEffect(Effect *effect,bool deleteEffect);
     List<WaveChunk> chunks;
     int globalsize;
     bool waserror;

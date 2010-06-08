@@ -71,10 +71,7 @@ WaveFile::~WaveFile() {
 }
 
 void WaveFile::applyEffect(Effect *effect){
-    for(int i=chunks.getSize()-1;i>=0;i--)
-        if(chunks[i].getID() == WaveChunk::DATAID)
-            effect->apply((DataChunk&)(chunks[i]));
-    delete effect;
+    applyEffect(effect,true);
 }
 
 void WaveFile::store(const char* filename){
@@ -86,4 +83,20 @@ void WaveFile::store(const char* filename){
     for(int i=0;i<max;i++)
         chunks[i].save(out);
     out.close();
+}
+
+void WaveFile::applyEffects(const List<Effect> &effects){
+    int sz = effects.getSize();
+    for(int i=0;i<sz;i++)
+        applyEffect(&effects[i],false);
+
+    
+}
+
+void WaveFile::applyEffect(Effect *effect,bool deleteEffect){
+    for(int i=chunks.getSize()-1;i>=0;i--)
+        if(chunks[i].getID() == WaveChunk::DATAID)
+            effect->apply((DataChunk&)(chunks[i]));
+    if(deleteEffect)
+        delete effect;
 }

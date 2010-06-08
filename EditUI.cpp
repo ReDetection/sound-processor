@@ -6,8 +6,6 @@
  */
 
 #include "Distortion.h"
-
-
 #include "EditUI.h"
 #include "Amplifier.h"
 #include "Normalizer.h"
@@ -57,7 +55,7 @@ void EditUI::ui(WaveFile& wave){
                 float amp = input("Введите амплитуду");
 
                 clock_t start = clock();
-                wave.applyEffect(new Amplifier(1.0/amp));
+                wave.applyEffect(new Amplifier(1.0/(1.0+amp)));
                 wave.applyEffect(new Echo(delay,amp));
                 wave.applyEffect(new Normalizer());
                 if (ArgsParser::getDebug())

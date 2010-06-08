@@ -48,7 +48,7 @@ void Normalizer::apply(DataChunk& samples){
             throw "Такой битрейт пока не поддерживается";
     }
 
-    k=maxint/maxs;
+    k=maxint*1.0/maxs;
     Amplifier::set(k);
     DiskreteEffect::apply(samples);
 }

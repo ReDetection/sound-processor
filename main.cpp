@@ -11,9 +11,8 @@
 #include "WaveFile.h"
 #include "EditUI.h"
 #include "ArgsParser.h"
-/*
- * 
- */
+
+
 int main(int argc, char** argv){
     //какой-то в мэйне код сумбурный..
 
@@ -36,7 +35,10 @@ int main(int argc, char** argv){
         }
     }
 
-    EditUI ui(wave);
+    if(ArgsParser::getEffects()!=0)
+        wave.applyEffects(*ArgsParser::getEffects());
+    else
+        EditUI ui(wave);
 
     if(outputfile==0)
             outputfile=selector.select();
