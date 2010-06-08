@@ -5,39 +5,39 @@
  * Created on 4 Июнь 2010 г., 12:59
  */
 
-#include "Echo.h"
+#include "Reverb.h"
 
-Echo::Echo() {
+Reverb::Reverb() {
     delay=1.0;
 }
 
-Echo::Echo(float delay, float volume) {
+Reverb::Reverb(float delay, float volume) {
     setDelay(delay);
     setVolume(volume);
 }
-void Echo::setVolume(float volume) {
+void Reverb::setVolume(float volume) {
     Amplifier::set(volume);
     
 }
-float Echo::getVolume() const {
+float Reverb::getVolume() const {
     return Amplifier::get();
 }
-void Echo::setDelay(float delay) {
+void Reverb::setDelay(float delay) {
     this->delay = delay;
 }
-float Echo::getDelay() const {
+float Reverb::getDelay() const {
     return delay;
 }
 
-Echo::Echo(const Echo& orig) {
+Reverb::Reverb(const Reverb& orig) {
     throw "Не должен этот класс копироваться!";
 }
 
-Echo::~Echo() {
+Reverb::~Reverb() {
 }
 
 
-void Echo::apply(DataChunk& samples){
+void Reverb::apply(DataChunk& samples){
     unsigned short bytePerSample=samples.getFormat()->bitsPerSample()/8;
     unsigned int count=samples.getSize()/bytePerSample; //samples count
     char *data8 = samples.getData();
@@ -47,12 +47,12 @@ void Echo::apply(DataChunk& samples){
     switch (bytePerSample) {
     case 1:
         maxint=127;
-        for(unsigned int i=count-1;i>=dl;i--)
+        for(unsigned int i=dl;i<count;i++)
             data8[i]+=Amplifier::apply(data8[i-dl]-0x80)+0x80;
         break;
     case 2:
         maxint=32767;
-        for(unsigned int i=count;i>=dl;i--)
+        for(unsigned int i=dl;i<count;i++)
             data16[i]+=Amplifier::apply(data16[i-dl]);
         break;
     default:

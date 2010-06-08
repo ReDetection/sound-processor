@@ -13,6 +13,7 @@
 #include "Compressor.h"
 #include "Overdrive.h"
 #include "ArgsParser.h"
+#include "Reverb.h"
 #include <iostream>
 
 EditUI::EditUI() {
@@ -63,12 +64,15 @@ void EditUI::ui(WaveFile& wave){
                 continue;
             }
             case 5:
-                eff = new Compressor(input("Введите входную точку перегиба( 0.0<x<1.0)"),input("Введите выходную точку перегиба( 0.0<y<1.0)"));
+                eff = new Reverb(input("Введите зедержку"),input("Введите амплитуду"));
                 break;
             case 6:
-                eff = new Overdrive();
+                eff = new Compressor(input("Введите входную точку перегиба( 0.0<x<1.0)"),input("Введите выходную точку перегиба( 0.0<y<1.0)"));
                 break;
             case 7:
+                eff = new Overdrive();
+                break;
+            case 8:
                 eff = new Distortion();
                 break;
             default:
@@ -87,6 +91,7 @@ void EditUI::init(){
     items.appendConst("Нормализация");
     items.appendConst("Эхо");
     items.appendConst("Умное эхо");
+    items.appendConst("Реверберация");
     items.appendConst("Компрессия");
     items.appendConst("Перегруз");
     items.appendConst("Дисторшн");

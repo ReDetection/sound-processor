@@ -12,6 +12,7 @@
 #include "Compressor.h"
 #include "Overdrive.h"
 #include "Distortion.h"
+#include "Reverb.h"
 #include <cstring>
 #include <cstdlib>
 #include <iostream>
@@ -69,12 +70,18 @@ void ArgsParser::parse(int argc, char** argv) {
             list.append(new Distortion());
             continue;
         }
+        if(strncmp("-rev",argv[i],4)==0){
+            float delay = atof(argv[++i]);
+            list.append(new Reverb(delay,atof(argv[++i])));
+            continue;
+        }
         if(strcmp("-h",argv[i])==0 || strncmp("--h",argv[i],3)==0){
             std::cout << "Возможные опции:\n\t" << argv[0] << " [ -i ФАЙЛ ]"
                     " [ -o ФАЙЛ ] [ -debug | ЭФФЕКТЫ... ]\n, где ЭФФЕКТЫ "
                     "могут состоять из:\n\t-amp, -amplifier КОЭФФИЦИЕНТ\n\t"
                     "-nor, -normalizer\n\t-echo ЗАДЕРЖКА КОЭФФ_АМПЛИТУДЫ\n\t"
-                    "-cle, -cleverecho ЗАДЕРЖКА КОЭФФ_АМПЛИТУДЫ\n\t-comp, "
+                    "-cle, -cleverecho ЗАДЕРЖКА КОЭФФ_АМПЛИТУДЫ\n\t-rev, "
+                    "-reverb ЗАДЕРЖКА КОЭФФ_АМПЛИТУДЫ\n\t-comp, "
                     "-compressor X Y, где X и Y - коориднаты точки перегиба,"
                     "\n\t\tобе больше нуля и меньше единицы\n\t-over, "
                     "-overdrive\n\t-dis, -distortion\n";
