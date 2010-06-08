@@ -15,31 +15,18 @@ inline short sign(short a){
 //    return (a+a+b)/3;
 //}
 short Distortion::calc(short a,short mod){
-//    if(clip!=0){
-//        if(abs(a)>clip)
-//            return clip*sign(a);
-//        //else
-//        clip=0;
-//        return a;
-//    }else{
-//        if(abs(a)>mod){
-//            clip=mod;
-//            return clip*sign(a);
-//        }
-//    }
-
-
-    if(abs(a)>mod){
-        if(clip==0)
-            clip=mod;
-        return clip*sign(a);
+    if(clip!=0){
+        if(abs(a)>clip)
+            return clip*sign(a);
+        //else
+        clip=0;
+        return a;
     }else{
-//        if(abs(a)>clip)
-//            return clip*sign(a);
-//        else{
-            clip=0;
-            return a;
-//        }
+        if(abs(a)>mod/0.8){
+            clip=mod;
+            return clip*sign(a);
+        }
+        return a;
     }
 }
 

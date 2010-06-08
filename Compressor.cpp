@@ -43,6 +43,13 @@ short Compressor::apply(short sample){
 }
 
 void Compressor::apply(DataChunk& samples){
+    switch( samples.getFormat()->bitsPerSample()/8){
+        case 2:
+            maxint =32767;break;
+        case 1:
+            maxint = 127;
+            break;
+    }
     b = (1.0-a2)*maxint;
     DiskreteEffect::apply(samples);
 }

@@ -10,19 +10,29 @@
 #include "FileSelectorUI.h"
 #include "WaveFile.h"
 #include "EditUI.h"
+#include "ArgsParser.h"
 /*
  * 
  */
 int main(int argc, char** argv){
 
+//    ArgsParser args(argc,argv);
+//    char *inputfile = args, *outputfile;
+
+
+
+
+
+
+    
     FileSelectorUI selector;
 
     WaveFile wave;
     bool loaded=false;//переписать эти пять строк костыля на что-нибудь приличное
     while(!loaded){
         try{
-            wave.load(selector.select());
-            loaded=true;
+            
+            loaded=wave.load(selector.select());
         }catch(std::ios::failure f){
             loaded=false;
         }
