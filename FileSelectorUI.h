@@ -8,7 +8,7 @@
 #ifndef _FILESELECTORUI_H
 #define	_FILESELECTORUI_H
 #include "MenuUI.h"
-#include "StringArray.h"
+#include "StringList.h"
 
 class FileSelectorUI {
 
@@ -20,7 +20,7 @@ public:
     const char *select();
 
 private:
-    StringArray elems;//пункты меню
+    StringList elems;//пункты меню
     MenuUI menu;
 
 };

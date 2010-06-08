@@ -9,19 +9,19 @@
  * полезного, я передумал ) может, позже..
  */
 
-#ifndef _STRINGARRAY_H
-#define	_STRINGARRAY_H
+#ifndef _STRINGLIST_H
+#define	_STRINGLIST_H
 #include <fstream>
 
 #include "List.h"
 #include "String.h"
 
-class StringArray {
+class StringList {
 public:
-    StringArray();
+    StringList();
 //    StringArray(int count);
-    StringArray(const StringArray& orig);
-    virtual ~StringArray();
+    StringList(const StringList& orig);
+    virtual ~StringList();
 
     const char* operator[](int n) const;
     const char* get(int n)const;
@@ -48,20 +48,7 @@ public:
     void load(std::ifstream& in);
 
 protected:
-//    int size;
     List<String> array;
-//    /*
-//     * массив состояний соответствующих элементов из array.
-//     * (const/не-const, занят/свободен..)
-//     * свободен = 0, изменяемый = 1, константный = 2
-//     */
-//    char *native;
-
-
-private:
-//    void allocate();
-//    void shift();//сдвиг элементов массива на 1 элемент в сторону
-//    void destroy();//мне надо вызвать деструктор без разрушения самого объкета
 };
 
 #endif	/* _STRINGARRAY_H */

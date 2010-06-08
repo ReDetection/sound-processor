@@ -15,34 +15,33 @@
  * 
  */
 int main(int argc, char** argv){
+    //какой-то в мэйне код сумбурный..
 
-//    ArgsParser args(argc,argv);
-//    char *inputfile = args, *outputfile;
-
-
-
-
-
-
+    ArgsParser::parse(argc,argv);
+    const char *inputfile = ArgsParser::getInput(),
+               *outputfile = ArgsParser::getOutput();
     
     FileSelectorUI selector;
 
     WaveFile wave;
-    bool loaded=false;//переписать эти пять строк костыля на что-нибудь приличное
-    while(!loaded){
+    bool loaded=false;
+    if(inputfile==0)
+        inputfile=selector.select();
+    while(!loaded){ //переписать эти пять строк костыля на что-нибудь приличное
         try{
-            
-            loaded=wave.load(selector.select());
+            loaded=wave.load(inputfile);
         }catch(std::ios::failure f){
             loaded=false;
+            inputfile=0;
         }
     }
 
     EditUI ui(wave);
-    
-    wave.store(selector.select());
 
-    
+    if(outputfile==0)
+            outputfile=selector.select();
+    wave.store(outputfile);
+
     return (0);
 }
 

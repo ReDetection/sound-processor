@@ -8,13 +8,13 @@
 #ifndef _MENU_H
 #define	_MENU_H
 
-#include "StringArray.h"
+#include "StringList.h"
 #include "List.h"
 
 
 class MenuUI {
 public:
-    MenuUI(const StringArray* elem,const char * hint);
+    MenuUI(const StringList* elem,const char * hint);
     MenuUI(const MenuUI& orig);
     MenuUI();
 
@@ -23,12 +23,12 @@ public:
     int chooseIndex()const;
     const char *choose()const;
 
-    void setElements(const StringArray* elem);
+    void setElements(const StringList* elem);
     void setHint(const char * hint);
     void setBack(const char *hint);
 
 protected:
-    const StringArray *items;
+    const StringList *items;
     const char *hint,*back;
 private:
 

@@ -26,7 +26,7 @@ private:
     short middle(short a);
 
     float s;
-    short samples,smiddle;
+    short samples,smiddle,clip;
 
 };
 

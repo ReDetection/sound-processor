@@ -14,6 +14,7 @@
 #include "Echo.h"
 #include "Compressor.h"
 #include "Overdrive.h"
+#include "ArgsParser.h"
 #include <iostream>
 
 EditUI::EditUI() {
@@ -51,19 +52,34 @@ void EditUI::ui(WaveFile& wave){
             case 3:
                 eff= new Echo(input("Введите зедержку"),input("Введите амплитуду"));
                 break;
-            case 4:
+            case 4:{
+                float delay=input("Введите зедержку");
+                float amp = input("Введите амплитуду");
+
+                clock_t start = clock();
+                wave.applyEffect(new Amplifier(1.0/amp));
+                wave.applyEffect(new Echo(delay,amp));
+                wave.applyEffect(new Normalizer());
+                if (ArgsParser::getDebug())
+                    std::cout << "dClock=" << clock() - start << std::endl;
+                continue;
+            }
+            case 5:
                 eff = new Compressor(input("Введите входную точку перегиба( 0.0<x<1.0)"),input("Введите выходную точку перегиба( 0.0<y<1.0)"));
                 break;
-            case 5:
+            case 6:
                 eff = new Overdrive();
                 break;
-            case 6:
+            case 7:
                 eff = new Distortion();
                 break;
             default:
                 continue;
         }
+        clock_t start= clock();
         wave.applyEffect(eff);
+        if(ArgsParser::getDebug())
+            std::cout << "dClock=" << clock() - start << std::endl;
     }
 
 }
@@ -72,6 +88,7 @@ void EditUI::init(){
     items.appendConst("Усилитель");
     items.appendConst("Нормализация");
     items.appendConst("Эхо");
+    items.appendConst("Умное эхо");
     items.appendConst("Компрессия");
     items.appendConst("Перегруз");
     items.appendConst("Дисторшн");

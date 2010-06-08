@@ -11,20 +11,30 @@ inline short abs(short a){
 inline short sign(short a){
     return a>=0? 1: -1;
 }
-inline short amdl(short a,short b){ //for overdrive test
-    return (a+a+b)/3;
+inline short amdl(short a,short b){
+    return (a+b)/2;
 }
 short Overdrive::calc(short a,short mod){
-    if(abs(a)>mod){
-        return mod*sign(a);
-    }else
+    if(clip!=0){
+        if(abs(a)>clip)
+            return clip*sign(a);
+        //else
+        clip=0;
         return a;
+    }else{
+        if(abs(a)>mod*1.25){
+            clip=mod;
+            return clip*sign(a);
+        }
+        return a;
+    }
 }
 
 Overdrive::Overdrive() {
     s=0;
     samples=0;
     smiddle=0;
+    clip=0;
 }
 
 Overdrive::Overdrive(const Overdrive& orig) {

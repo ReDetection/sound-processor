@@ -10,7 +10,7 @@
 
 #include "WaveFile.h"
 #include "MenuUI.h"
-#include "StringArray.h"
+#include "StringList.h"
 
 
 class EditUI {
@@ -27,7 +27,7 @@ public:
 private:
     WaveFile *wave;
     MenuUI *menu;
-    StringArray items;
+    StringList items;
 
     float input(const char * hint)const;
 

@@ -22,7 +22,7 @@ short Distortion::calc(short a,short mod){
         clip=0;
         return a;
     }else{
-        if(abs(a)>mod/0.8){
+        if(abs(a)>mod*1.25){
             clip=mod;
             return clip*sign(a);
         }

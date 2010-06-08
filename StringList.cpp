@@ -8,58 +8,58 @@
 #include <cstring>
 #include <cstdlib>
 
-#include "StringArray.h"
+#include "StringList.h"
 #include "FileSelectorUI.h"
 
-StringArray::StringArray() {}
+StringList::StringList() {}
 
-StringArray::StringArray(const StringArray& orig) {
+StringList::StringList(const StringList& orig) {
     throw "Not implemented yet";
 }
 
-StringArray::~StringArray() {
+StringList::~StringList() {
 }
 
-const char * StringArray::get(int n)const{
+const char * StringList::get(int n)const{
     return array.getItem(n)->get();
 }
-const char * StringArray::operator [](int n)const{
+const char * StringList::operator [](int n)const{
     return get(n);
 }
 
-int  StringArray::putConst(const char* string, int place){
+int  StringList::putConst(const char* string, int place){
     return array.append(new String(string),place);
 }
 
-int StringArray::put(char* string, int place){
+int StringList::put(char* string, int place){
     String *a=new String();
     a->set(string);
     return array.append(a,place);
 }
-int StringArray::putClone(const char* string, int place){
+int StringList::putClone(const char* string, int place){
     return put(strdup(string),place);
 }
 
-int StringArray::addConst(const char* string){
+int StringList::addConst(const char* string){
     return putConst(string,0);
 }
-int StringArray::add(char* string){
+int StringList::add(char* string){
     return put(string,0);
 
 }
-int StringArray::addClone(const char* string){
+int StringList::addClone(const char* string){
     return add(strdup(string));
 }
 
-void StringArray::raiseUp(int which){
+void StringList::raiseUp(int which){
     array.raiseUp(which);
 }
 
-int StringArray::getSize()const{
+int StringList::getSize()const{
     array.getSize();
 }
 
-void StringArray::store(std::ofstream& out)const{
+void StringList::store(std::ofstream& out)const{
     char ID='S';
     out.write(&ID, 1);
     int len = array.getSize();
@@ -69,7 +69,7 @@ void StringArray::store(std::ofstream& out)const{
     
 }
 
-void StringArray::load(std::ifstream &in){
+void StringList::load(std::ifstream &in){
     char ID=0;
     int size;
     in.read(&ID,1);//сверяем сигнатруру
@@ -85,14 +85,14 @@ void StringArray::load(std::ifstream &in){
     }
 }
 
-int StringArray::appendConst(const char* string){
+int StringList::appendConst(const char* string){
     return array.append(new String(string));
 }
-int StringArray::append(char* string){
+int StringList::append(char* string){
     String *s = new String();
     s->set(string);
     return array.append(s);
 }
-int StringArray::appendClone(const char* string){
+int StringList::appendClone(const char* string){
     return append(strdup(string));
 }

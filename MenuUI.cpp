@@ -10,7 +10,7 @@
 #include "String.h"
 #include <iostream>
 
-MenuUI::MenuUI(const StringArray* elems,const char * hint) {
+MenuUI::MenuUI(const StringList* elems,const char * hint) {
     items=elems;
     this->hint=hint;
     back=0;
@@ -20,7 +20,7 @@ MenuUI::MenuUI(){
     back=hint=0;
 }
 
-void MenuUI::setElements(const StringArray* elem){
+void MenuUI::setElements(const StringList* elem){
     items = elem;
 }
 
