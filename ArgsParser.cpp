@@ -77,7 +77,7 @@ void ArgsParser::parse(int argc, char** argv) {
         }
         if(strcmp("-h",argv[i])==0 || strncmp("--h",argv[i],3)==0){
             std::cout << "Возможные опции:\n\t" << argv[0] << " [ -i ФАЙЛ ]"
-                    " [ -o ФАЙЛ ] [ -debug | ЭФФЕКТЫ... ]\n, где ЭФФЕКТЫ "
+                    " [ -o ФАЙЛ ] [ -debug ] [ ЭФФЕКТЫ... ]\n, где ЭФФЕКТЫ "
                     "могут состоять из:\n\t-amp, -amplifier КОЭФФИЦИЕНТ\n\t"
                     "-nor, -normalizer\n\t-echo ЗАДЕРЖКА КОЭФФ_АМПЛИТУДЫ\n\t"
                     "-cle, -cleverecho ЗАДЕРЖКА КОЭФФ_АМПЛИТУДЫ\n\t-rev, "
