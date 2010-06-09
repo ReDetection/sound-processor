@@ -14,11 +14,12 @@
 class WaveFile {
 public:
 
-    WaveFile();//load from file
+    WaveFile();
     WaveFile(const WaveFile& orig);
     virtual ~WaveFile();
 
-    bool wasError();
+    bool wasError()const;
+    bool isLoaded()const;
     void applyEffect(Effect *effect);
     void applyEffects(const List<Effect> &effects);
 
@@ -30,7 +31,7 @@ private:
     void applyEffect(Effect *effect,bool deleteEffect);
     List<WaveChunk> chunks;
     int globalsize;
-    bool waserror;
+    bool waserror,loaded;
 };
 
 #endif	/* _WAVEFILE_H */

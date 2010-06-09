@@ -23,16 +23,13 @@ int main(int argc, char** argv){
     FileSelectorUI selector;
 
     WaveFile wave;
-    bool loaded=false;
-    if(inputfile==0)
-        inputfile=selector.select();
-    while(!loaded){ //переписать эти пять строк костыля на что-нибудь приличное
+    try{wave.load(inputfile);}catch(...){}
+        
+    while(!wave.isLoaded()){ 
+        inputfile = selector.select();
         try{
-            loaded=wave.load(inputfile);
-        }catch(std::ios::failure f){
-            loaded=false;
-            inputfile=0;
-        }
+            wave.load(inputfile);
+        }catch(std::ios::failure f){}
     }
 
     if(ArgsParser::getEffects()!=0)

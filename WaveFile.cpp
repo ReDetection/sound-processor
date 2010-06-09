@@ -14,9 +14,15 @@
 
 WaveFile::WaveFile(){
     waserror=true;
+    loaded=false;
 }
 
 bool WaveFile::load(const char* filename) {
+    loaded=false;
+    if(filename==0){
+        waserror=true;
+        return false;
+    }
     bool fmtExist=false,wvExist=false;
     std::ifstream in(filename,std::ios::in | std::ios::binary);
     in.exceptions( std::ios::failbit);
@@ -57,11 +63,15 @@ bool WaveFile::load(const char* filename) {
     }catch(std::ios::failure f){
         waserror=true;
     }
-    return fmtExist && wvExist;
+    loaded = fmtExist && wvExist;
+    return loaded;
 }
 
-bool WaveFile::wasError(){
+bool WaveFile::wasError()const{
     return waserror;
+}
+bool WaveFile::isLoaded() const{
+    return loaded;
 }
 
 WaveFile::WaveFile(const WaveFile& orig) {
