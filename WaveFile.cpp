@@ -9,6 +9,7 @@
 #include "union.h"
 #include "FormatChunk.h"
 #include "DataChunk.h"
+#include "ArgsParser.h"
 #include <fstream>
 
 WaveFile::WaveFile(){
@@ -86,10 +87,13 @@ void WaveFile::store(const char* filename){
 }
 
 void WaveFile::applyEffects(const List<Effect> &effects){
+    clock_t start= clock();
     int sz = effects.getSize();
     for(int i=0;i<sz;i++)
         applyEffect(&effects[i],false);
 
+    if(ArgsParser::getDebug())
+        std::cout << "Комплекс эффектов применен за " << (clock() - start)/1000 << " мс.\n";
     
 }
 

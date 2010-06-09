@@ -91,9 +91,6 @@ void ArgsParser::parse(int argc, char** argv) {
         exit(1);
 
     }
-    if(list.getSize()>0 && debug)
-        std::cout << "Предупреждение: пропущена опция -debug\n";
-
 }
 
 bool ArgsParser::getDebug(){

@@ -60,7 +60,7 @@ void EditUI::ui(WaveFile& wave){
                 wave.applyEffect(new Echo(delay,amp));
                 wave.applyEffect(new Normalizer());
                 if (ArgsParser::getDebug())
-                    std::cout << "dClock=" << clock() - start << std::endl;
+                    std::cout << "Комплекс эффектов применен за " << (clock() - start)/1000 << "мс.\n";
                 continue;
             }
             case 5:
@@ -81,7 +81,7 @@ void EditUI::ui(WaveFile& wave){
         clock_t start= clock();
         wave.applyEffect(eff);
         if(ArgsParser::getDebug())
-            std::cout << "dClock=" << clock() - start << std::endl;
+            std::cout << "Эффект применен за " << (clock() - start)/1000 << " мс.";
     }
 
 }
